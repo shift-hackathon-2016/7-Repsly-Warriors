@@ -51,13 +51,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public User getUser(String id) {
+
+    public User getUser() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c;
         boolean hadRecods;
         User user = new User();
         c = db
-                .query("User", null, "accountRowId=?", new String[]{id},
+                .query("User", null, null, null,
                        null, null, null, null);
         if (c != null) {
             hadRecods = c.moveToFirst();
