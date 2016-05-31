@@ -12,6 +12,9 @@
 
     uiGmapGoogleMapApi.then(function (maps) {
         $scope.options = { scrollwheel: false };
+        $scope.markers = dashboard.getMarkers();
+        dashboard.registerEvents($scope.markers);
+        $scope.onMarkerClicked = dashboard.onMarkerClicked;
     })
 
 })
