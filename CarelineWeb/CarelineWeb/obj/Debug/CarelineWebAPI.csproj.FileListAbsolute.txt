@@ -52,3 +52,5 @@ C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\System.Web.Htt
 C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\obj\Debug\CarelineWebAPI.csprojResolveAssemblyReference.cache
 C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\obj\Debug\CarelineWebAPI.dll
 C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\obj\Debug\CarelineWebAPI.pdb
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\DBLayer.dll
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\DBLayer.pdb
