@@ -34,6 +34,22 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static void SaveTrackingEvent(NewTrackingEventModel model, int userId, int accountId)
+        {
+            using (DBConnector connector = new DBConnector("save_TrackingEvent", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Cmd.Parameters.AddWithValue("@UserID", userId);
+                connector.Cmd.Parameters.AddWithValue("@EventTypeID", model.EventTypeID);
+                connector.Cmd.Parameters.AddWithValue("@EventDateTime", model.EventDateTime);
+                connector.Cmd.Parameters.AddWithValue("@Latitude", model.Latitude);
+                connector.Cmd.Parameters.AddWithValue("@Longitude", model.Longitude);
+                connector.Cmd.Parameters.AddWithValue("@RelatedScheduleRowid", model.RelatedScheduleRowid);
+
+                connector.Execute(DBOperation.Save);
+            }
+        }
+
         internal static void SaveMedicineConfirmation(MedicineConfirmationModel model, int userId)
         {
             using (DBConnector connector = new DBConnector("save_ScheduleConfirmation", CommandType.StoredProcedure))
