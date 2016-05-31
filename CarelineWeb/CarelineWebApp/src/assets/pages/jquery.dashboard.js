@@ -49,14 +49,14 @@ $( document ).ready(function() {
     };
 
 
-    DrawSparkline();
+    //DrawSparkline();
 
-    var resizeChart;
+    //var resizeChart;
 
-    $(window).resize(function(e) {
-        clearTimeout(resizeChart);
-        resizeChart = setTimeout(function() {
-            DrawSparkline();
-        }, 300);
-    });
+    //$(window).resize(function(e) {
+    //    clearTimeout(resizeChart);
+    //    resizeChart = setTimeout(function() {
+    //        DrawSparkline();
+    //    }, 300);
+    //});
 });

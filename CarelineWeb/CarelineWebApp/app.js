@@ -21,4 +21,4 @@ carelineApp.config(function ($routeProvider, $locationProvider, uiGmapGoogleMapA
         v: '3',
         libraries: 'weather,geometry,visualization, places'
     });
-}]);
+});
