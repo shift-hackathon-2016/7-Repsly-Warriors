@@ -17,7 +17,7 @@
                         <a data-toggle="modal" data-target="#tabs-modal"><img src="assets/images/users/{{receiver.Avatar}}" class="img-responsive img-circle" alt="user"></a>
                         <div class="wid-u-info">
                             <h4 class="m-t-0 m-b-5"><a href="receiver/{{receiver.IDUser}}">{{receiver.Name}}</a></h4>
-                            <p class="text-muted m-b-5 font-13">last movement 120 mins ago</p>
+                            <p class="text-muted m-b-5 font-13">last movement <span id="last-movement" data-time="{{receiver.LasMovementDateTime}}"></span></p>
                             <small class="text"><b>at home</b></small>
                         </div>
                     </div>
@@ -94,3 +94,11 @@
         </div>
     </form><!-- /.modal -->
 </div>
+<script src='src/assets/moment/moment.js'></script>
+<script>
+    $(function () {
+        var lastMovement = $('#last-movement').data('time'); 
+        var ago = moment(lastMovement).fromNow();
+        $('#last-movement').text(ago);
+    })
+</script>
