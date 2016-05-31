@@ -35,6 +35,39 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static List<CareReceiverModel> GetCareReceiverList(int accountId)
+        {
+            List<CareReceiverModel> modelList = new List<CareReceiverModel>();
+            using (DBConnector connector = new DBConnector("get_CareReceiverList", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Execute(DBOperation.GetWhileReader);
+
+                if (connector.Rdr.HasRows)
+                {
+                    while (connector.Rdr.Read())
+                    {
+                        CareReceiverModel model = new CareReceiverModel();
+
+                        model.UserId = Convert.ToInt32(connector.Rdr["IDUser"]);
+                        model.UserRowId = (Guid)connector.Rdr["UserRowid"];
+                        model.AccountId = Convert.ToInt32(connector.Rdr["AccountID"]);
+                        model.Name = connector.Rdr["Name"].ToString();
+                        model.Address = connector.Rdr["Address"].ToString();
+                        model.Manager = (bool)connector.Rdr["Manager"];
+                        model.Avatar = connector.Rdr["Avatar"].ToString();
+                        model.Username = connector.Rdr["Username"].ToString();
+                        model.Password = connector.Rdr["Password"].ToString();
+                        model.LastMovementDateTime = (DateTime)connector.Rdr["LastMovementDateTime"];
+
+                        modelList.Add(model);
+                    }
+                }
+            }
+
+            return modelList;
+        }
+
         internal static int SaveCareReceiver(CareReceiverModel model, int accountId)
         {
             using (DBConnector connector = new DBConnector("save_CareReceiver", CommandType.StoredProcedure))

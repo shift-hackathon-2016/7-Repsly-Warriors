@@ -32,5 +32,10 @@ namespace CarelineWebAPI.Controllers
                 return 0;
             }
         }
+
+        public List<CareReceiverModel> GetList()
+        {
+            return DBOperations.GetCareReceiverList(AccountContextHelper.GetContext().AccountId);
+        }
     }
 }
