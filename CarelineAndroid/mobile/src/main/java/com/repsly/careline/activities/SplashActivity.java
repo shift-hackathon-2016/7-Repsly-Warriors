@@ -26,14 +26,14 @@ public class SplashActivity extends SplashAbstract {
     public Class getNextClassActivity() {
         LocationHelper.startLocationGettingProcess(getApplicationContext());
         AlarmHelper.setAlarmForMovementTracking(getApplicationContext());
-        DbHelper dbHelper = new DbHelper(this);
+        /*DbHelper dbHelper = new DbHelper(this);
         User user= dbHelper.getUser();
         if(user!=null) {
             if(user.isManager()){
                 return HomeGiverActivity.class;
             }
             return HomeReceiverActivity.class;
-        }
+        }*/
         return LogInActivity.class;
     }
 }

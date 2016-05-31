@@ -2,7 +2,11 @@ package com.repsly.careline.retrofit;
 
 import android.util.Base64;
 
+import com.repsly.careline.interfaces.ILogin;
 import com.repsly.careline.model.User;
+import com.repsly.careline.model.network.ServerStatus;
+import com.repsly.careline.model.network.UserData;
+import com.repsly.careline.model.network.UserPassModel;
 import com.repsly.careline.retrofit.interfaces.ApiCarelineInterface;
 
 import java.io.IOException;
@@ -13,6 +17,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,13 +29,8 @@ public class ApiCarelineImpl {
     String url;
     OkHttpClient.Builder client;
 
-    public ApiCarelineImpl() {
-
-    }
-
-    public ApiCarelineImpl setUrl(String url) {
+    public ApiCarelineImpl(String url) {
         this.url = url;
-        return this;
     }
 
     public ApiCarelineImpl buildInterceptor() {
@@ -43,14 +43,10 @@ public class ApiCarelineImpl {
 
     /**
      * Method for setting auth header.
-     * @param username
-     * @param password
+     *
      * @return
      */
-    public ApiCarelineImpl addAuthHeader(String username, String password) {
-        String credentials = username + ":" + password;
-        final String basic =
-                "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+    public ApiCarelineImpl addAuthHeader(final String basic) {
         client.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -58,8 +54,9 @@ public class ApiCarelineImpl {
 
                 Request.Builder requestBuilder = original.newBuilder()
                                                          .header("Authorization", basic)
-                .header("Accept", "application/json")
-                .method(original.method(), original.body());
+                                                         .header("Accept", "application/json")
+                                                         .method(original.method(),
+                                                                 original.body());
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
             }
@@ -67,8 +64,36 @@ public class ApiCarelineImpl {
         return this;
     }
 
+    public void sendLoginData(final ILogin login) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
+        ApiCarelineInterface apiCarelineService = retrofit.create(ApiCarelineInterface.class);
+        Call<UserData> sendData = apiCarelineService
+                .sendUserPass();
+        sendData.enqueue(new Callback<UserData>() {
+            @Override
+            public void onResponse(Call<UserData> call,
+                                   retrofit2.Response<UserData> response) {
+                if (response.body() != null) {
+                    login.LoginResult(response.body());
+                } else {
+                    login.LoginResult(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserData> call, Throwable t) {
+                login.LoginResult(null);
+            }
+        });
+    }
+
     /**
      * TODO call it from async!
+     *
      * @return user data
      */
     public User getUserData() {
