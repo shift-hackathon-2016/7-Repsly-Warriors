@@ -22,8 +22,8 @@ namespace CarelineWebAPI.Helpers
                 {
                     AccountContext context = new AccountContext();
 
-                    context.UserID = Convert.ToInt32(connector.Rdr["IDUser"]);
-                    context.AccountID = Convert.ToInt32(connector.Rdr["AccountID"]);
+                    context.UserId = Convert.ToInt32(connector.Rdr["IDUser"]);
+                    context.AccountId = Convert.ToInt32(connector.Rdr["AccountID"]);
                     context.Manager = (bool)connector.Rdr["Manager"];
 
                     AccountContextHelper.SetContext(context);

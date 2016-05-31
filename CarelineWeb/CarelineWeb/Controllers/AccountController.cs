@@ -17,7 +17,7 @@ namespace CarelineWebAPI.Controllers
         [HttpGet]
         public MobileUserModel MobileGetUserData()
         {
-            return DBOperations.GetUserDataByUserID(AccountContextHelper.GetContext().UserID);
+            return DBOperations.GetUserDataByUserID(AccountContextHelper.GetContext().UserId);
         }
 
         // GET: api/Account

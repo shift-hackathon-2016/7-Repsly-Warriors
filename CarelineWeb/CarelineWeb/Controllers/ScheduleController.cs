@@ -16,7 +16,21 @@ namespace CarelineWebAPI.Controllers
     {
         public List<ScheduleModel> GetScheduleForMobileUser()
         {
-            return DBOperations.GetUserScheduleList(AccountContextHelper.GetContext().UserID);
+            return DBOperations.GetUserScheduleList(AccountContextHelper.GetContext().UserId);
+        }
+
+        [HttpPost]
+        public int MedicineConfirmation([FromBody] MedicineConfirmationModel model)
+        {
+            try
+            {
+                DBOperations.SaveMedicineConfirmation(model, AccountContextHelper.GetContext().UserId);
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
     }
 }

@@ -150,6 +150,7 @@
     <Compile Include="Helpers\AccountContextHelper.cs" />
     <Compile Include="Helpers\RequestValidationHelper.cs" />
     <Compile Include="Models\AccountContext.cs" />
+    <Compile Include="Models\MedicineConfirmationModel.cs" />
     <Compile Include="Models\MobileUserModel.cs" />
     <Compile Include="Models\MyGlobals.cs" />
     <Compile Include="Models\ScheduleModel.cs" />

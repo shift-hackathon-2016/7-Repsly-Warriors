@@ -34,6 +34,18 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static void SaveMedicineConfirmation(MedicineConfirmationModel model, int userId)
+        {
+            using (DBConnector connector = new DBConnector("save_ScheduleConfirmation", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@UserID", userId);
+                connector.Cmd.Parameters.AddWithValue("@ScheduleRowid", model.ScheduleRowid);
+                connector.Cmd.Parameters.AddWithValue("@ConfirmationDateTime", model.ConfirmationDateTime);
+
+                connector.Execute(DBOperation.Save);
+            }            
+        }
+
         internal static List<ScheduleModel> GetUserScheduleList(int userId)
         {
             List<ScheduleModel> modelList = new List<ScheduleModel>();
