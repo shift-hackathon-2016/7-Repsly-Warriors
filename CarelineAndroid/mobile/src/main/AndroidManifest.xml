@@ -11,6 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"/>
         <activity android:name=".activities.LogInActivity"/>
+        <activity android:name=".activities.HomeGiverActivity"/>
+        <activity android:name=".activities.HomeReceiverActivity"/>
 
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
