@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.repsly.careline.helpcenter.HelpCenterItem;
 import com.repsly.careline.helpcenter.HelpItemViewBinder;
+import com.repsly.careline.receivers.ReceiverItemViewBinder;
+import com.repsly.careline.receivers.ReceiverListItem;
 import com.repsly.utils.lib.list.DataBinder;
 import com.repsly.utils.lib.list.ListItem;
 
@@ -45,7 +47,9 @@ public class CarelineRecyclerAdapter<T extends ListItem> extends CarelineDataBin
     public int getItemViewType(int position) {
        if (items.get(position) instanceof HelpCenterItem) {
             return HELP_ITEM;
-        }
+        } else if (items.get(position) instanceof ReceiverListItem){
+           return RECEIVER_ITEM;
+       }
         return 0;
     }
 
@@ -55,6 +59,8 @@ public class CarelineRecyclerAdapter<T extends ListItem> extends CarelineDataBin
        switch (viewType) {
             case HELP_ITEM:
                 return (T) new HelpItemViewBinder(this);
+           case RECEIVER_ITEM:
+               return (T) new ReceiverItemViewBinder(this);
             default:
                 return null;
         }
