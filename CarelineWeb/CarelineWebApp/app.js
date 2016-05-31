@@ -7,7 +7,7 @@ carelineApp.config(function ($routeProvider, $locationProvider, uiGmapGoogleMapA
             controller: 'DashboardController',
             templateUrl: 'src/dashboard/dashboard-template.html'
         })
-        .when('/CareReceivers', {
+        .when('/receivers', {
             controller: 'CareReceiversController',
             templateUrl: 'src/care-receivers/care-receivers-template.html'
         })

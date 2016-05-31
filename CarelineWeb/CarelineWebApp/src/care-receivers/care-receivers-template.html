@@ -1,0 +1,29 @@
+﻿<div ng-controller="CareReceiversController">
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="page-title">Care receivers</h4>
+        </div>
+        <div class="col-sm-3 text-right">
+            <button class="btn btn-primary btn-custom waves-effect w-md waves-light m-b-5" data-toggle="modal" data-target="#con-close-modal">Add new receiver</button>
+        </div>
+    </div>
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="care-receivers" ng-repeat="receiver in receivers.List">
+            <div class="col-sm-6 col-lg-4">
+                <div class="card-box widget-user">
+                    <div>
+                        <img src="assets/images/users/{{receiver.Avatar}}" class="img-responsive img-circle" alt="user">
+                        <div class="wid-u-info">
+                            <h4 class="m-t-0 m-b-5">{{receiver.Name}}</h4>
+                            <p class="text-muted m-b-5 font-13">{{receiver.Email}}</p>
+                            <small class="text-warning"><b>Admin</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- end row -->
