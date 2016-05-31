@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace CarelineWeb
+namespace CarelineWebAPI
 {
     public static class WebApiConfig
     {
