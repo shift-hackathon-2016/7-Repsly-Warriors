@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 23
@@ -34,4 +36,11 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile(group: 'com.repsly.utils', name: 'repsly-utils', version: '0.0.7', ext: 'aar')
 
+
+    //butterknife
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+
+    //remember
+    compile (group: 'com.tumblr', name: 'remember', version: '1.0.0', ext: 'aar')
 }
