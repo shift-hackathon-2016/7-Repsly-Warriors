@@ -35,6 +35,29 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static int SaveMedicine(MedicineModel model, int accountId)
+        {
+            using (DBConnector connector = new DBConnector("save_Medicine", CommandType.StoredProcedure))
+            {
+                SqlParameter IDParam = new SqlParameter("@MedicineID", SqlDbType.Int);
+                IDParam.Direction = ParameterDirection.InputOutput;
+                IDParam.Value = model.MedicineID;
+                connector.Cmd.Parameters.Add(IDParam);
+
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Cmd.Parameters.AddWithValue("@Name", model.Name);
+                connector.Cmd.Parameters.AddWithValue("@Description", model.Description);
+                connector.Cmd.Parameters.AddWithValue("@MedImg", model.MedImg);
+                connector.Cmd.Parameters.AddWithValue("@MedColor", model.MedColor);
+                connector.Cmd.Parameters.AddWithValue("@MedType", model.MedType);
+                connector.Cmd.Parameters.AddWithValue("@Quantity", model.Quantity);
+
+                connector.Execute(DBOperation.SaveWithOutput);
+
+                return Convert.ToInt32(connector.Cmd.Parameters["@MedicineID"].Value);
+            }
+        }
+
         internal static List<CareReceiverModel> GetCareReceiverList(int accountId)
         {
             List<CareReceiverModel> modelList = new List<CareReceiverModel>();
