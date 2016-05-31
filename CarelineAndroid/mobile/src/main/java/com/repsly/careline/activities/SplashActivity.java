@@ -1,9 +1,8 @@
 package com.repsly.careline.activities;
 
-import com.repsly.careline.MainActivity;
-import com.repsly.careline.Model.User;
 import com.repsly.careline.R;
 import com.repsly.careline.database.DbHelper;
+import com.repsly.careline.model.User;
 import com.repsly.utils.lib.activities.abstracts.SplashAbstract;
 
 /**

@@ -1,13 +1,23 @@
-package com.repsly.careline.Model;
+package com.repsly.careline.model;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by tosulc on 31.05.2016..
  */
 public class User {
-
+    @SerializedName("id")
+    @Expose
     public String id;
+    @SerializedName("name")
+    @Expose
     public String name;
+    @SerializedName("address")
+    @Expose
     public String address;
+    @SerializedName("isManager")
+    @Expose
     public boolean isManager;
 
     public User() {
