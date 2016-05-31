@@ -6,6 +6,7 @@ using CarelineWebAPI.Models;
 using System.Configuration;
 using DBLayer;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace CarelineWebAPI.Data
 {
@@ -32,6 +33,25 @@ namespace CarelineWebAPI.Data
             }
 
             return model;
+        }
+
+        internal static int RegisterAccount(RegistrationModel model)
+        {
+            using (DBConnector connector = new DBConnector("save_RegisterAccount", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@Name", model.Name);
+                connector.Cmd.Parameters.AddWithValue("@Email", model.Email);
+                connector.Cmd.Parameters.AddWithValue("@Password", model.Password);
+
+                SqlParameter IDParam = new SqlParameter("@Status", SqlDbType.Int);
+                IDParam.Direction = ParameterDirection.InputOutput;
+                IDParam.Value = 0;
+                connector.Cmd.Parameters.Add(IDParam);
+
+                connector.Execute(DBOperation.SaveWithOutput);
+
+                return Convert.ToInt32(connector.Cmd.Parameters["@Status"].Value);
+            }
         }
 
         internal static void SaveTrackingEvent(NewTrackingEventModel model, int userId, int accountId)

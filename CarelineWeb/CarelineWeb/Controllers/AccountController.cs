@@ -20,31 +20,16 @@ namespace CarelineWebAPI.Controllers
             return DBOperations.GetUserDataByUserID(AccountContextHelper.GetContext().UserId);
         }
 
-        // GET: api/Account
-        public IEnumerable<string> Get()
+        public int Registration([FromBody] RegistrationModel model)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Account/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Account
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Account/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Account/5
-        public void Delete(int id)
-        {
+            try
+            {
+                return DBOperations.RegisterAccount(model);
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
         }
     }
 }

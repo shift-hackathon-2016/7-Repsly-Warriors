@@ -155,6 +155,7 @@
     <Compile Include="Models\MobileUserModel.cs" />
     <Compile Include="Models\MyGlobals.cs" />
     <Compile Include="Models\NewTrackingEventModel.cs" />
+    <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
