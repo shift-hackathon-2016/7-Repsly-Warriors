@@ -130,6 +130,24 @@
                     format: 'hex',
                     color: '#AA3399'
                 });
+
+                $('#MedColor').on('change', function () {
+                    alert($(this).val());
+                })
+                $('#color-picker').colorpicker().trigger('changeColor');
+
+                var cp = $('#color-picker').data().colorpicker;
+                cp.color.setColor('#000000');
+                console.log(cp);
+                //cp.setColor('#AA3399');
+
+                //$('#color-picker').colorpicker().on('show', function (ev) {
+                //    //bodyStyle.backgroundColor = ev.color.toHex();
+                //    ev.color.setColor('#000000');
+                //    console.log(ev);
+                //});
+
+
             });
     </script>
 </div>

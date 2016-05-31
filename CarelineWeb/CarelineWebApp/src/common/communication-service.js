@@ -2,34 +2,46 @@
 /**
  * Ajax calls wrapper.
  */
-carelineApp.service('communication', function ($http, $q) {
-    var baseUrl = 'http://localhost:60319/api/';
-    var config = {
-        headers: {
-            'Authorization': 'Basic ' + ''
-        }
-    }
-
+carelineApp.service('communication', function ($http, $q, authService, localStorageService) {
+    this.baseUrl = 'http://localhost:60319/';
+    
     //POST
-    this.ajaxPost = function (url, params) {
+    this.ajaxPost = function (url, params, successHandler) {
         var deferred = $q.defer();
 
-        config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-        alert(JSON.stringify(params));
+        var authData = localStorageService.get('authorizationData');
+
+        var config = {
+            headers: {
+                'Authorization': 'Basic ' + authData,
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        }
 
         $http.post(url, JSON.stringify(params), config)
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
+                if (successHandler) {
+                    successHandler();
+                }
             })
             .error(function (data, status) {
-                alert(data);
+                if (successHandler) {
+                    successHandler();
+                }
+                //alert(data);
             });
         return deferred.promise;
     }
 
     //GET
     this.ajaxGet = function (url, param) {
-
+        var config = {
+            headers: {
+                'Authorization': 'Basic ' + btoa(authService.authentication.username + ':' + authService.authentication.password)
+            }
+        }
+        
         // test
         if (url == 'receivers') {
             hardcodedValues = {
@@ -121,6 +133,10 @@ carelineApp.service('communication', function ($http, $q) {
         var deferred = $q.defer();
         $http.get(url, param, config)
             .success(function (data, status, headers, config) {
+                if (data.indexOf && data.indexOf('<unauthorized></unauthorized>') > 0) {
+                    window.location = baseUrl + 'login';
+                    return;
+                }
                 deferred.resolve(data);
             })
             .error(function (data, status) {

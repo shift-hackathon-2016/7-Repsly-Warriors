@@ -26,6 +26,7 @@
     "requirejs": "^2.2.0",
     "bootstrap": "^3.3.6",
     "angular-google-maps": "^2.3.3",
-    "moment": "^2.13.0"
+    "moment": "^2.13.0",
+    "angular-local-storage": "^0.2.7"
   }
 }

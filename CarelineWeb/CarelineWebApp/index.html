@@ -25,7 +25,7 @@
 </head>
 <body>
     <!-- Navigation Bar-->
-    <header id="topnav">
+    <header id="topnav" ng-controller="NavigationController" ng-show="isAuth">
         <div class="topbar-main">
             <div class="container">
 
@@ -177,7 +177,7 @@
             <div id="main-content" data-ng-view="">
             </div>
             <!-- Footer -->
-            <footer class="footer text-right">
+            <footer class="footer text-right" ng-controller="FooterController" ng-show="isAuth">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
@@ -207,8 +207,6 @@
     <script src="src/assets/js/jquery.core.js"></script>
     <script src="src/assets/js/jquery.app.js"></script>
 
-
-
     <!-- Careline scripts and dependecies -->
     <script src='src/assets/angular/angular.js'></script>
     <script src='src/assets/angular-bootstrap/ui-bootstrap-tpls.min.js'></script>
@@ -216,8 +214,16 @@
     <script src='src/assets/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
     <script src='src/assets/angular-google-maps/dist/angular-google-maps.min.js'></script>
     <script src='src/assets/lodash/dist/lodash.min.js'></script>
+    <script src='src/assets/angular-local-storage/dist/angular-local-storage.min.js'></script>
     <script src="app.js"></script>
+    <script src='src/common/auth-service.js'></script>
     <script src="src/common/communication-service.js"></script>
+    <script src="src/login/login-service.js"></script>
+    <script src='src/login/login-controller.js'></script>
+    <script src="src/registration/register-service.js"></script>
+    <script src='src/registration/register-controller.js'></script>
+    <script src='src/common/navigation-controller.js'></script>
+    <script src='src/common/footer-controller.js'></script>
     <script src="src/common/google-maps-service.js"></script>
     <script src="src/dashboard/dashboard-service.js"></script>
     <script src='src/dashboard/dashboard-controller.js'></script>
