@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,7 +16,6 @@ import com.repsly.careline.helpers.AnimationHelper;
 import com.repsly.careline.model.ReminderScheduleItem;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +57,7 @@ public class ReminderActivity extends Activity {
                     AnimationHelper.fadeOutView((LinearLayout) v.getParent(), 1.0f, 0);
                     --numberOfItems[0];
                     if (numberOfItems[0] == 0) {
+                        //TODO send data to the server!
                         Toast.makeText(getApplicationContext(), "You did it, now we will leave from this page!", Toast.LENGTH_LONG).show();
                         NotificationManager nm = (NotificationManager) getApplicationContext()
                                 .getSystemService(Context.NOTIFICATION_SERVICE);

@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.repsly.careline.model.ReminderScheduleItem;
-import com.repsly.careline.model.Schedule;
 import com.repsly.careline.model.User;
 
 import java.util.ArrayList;
