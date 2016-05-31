@@ -15,6 +15,7 @@ carelineApp.service('communication', function ($http, $q) {
         var deferred = $q.defer();
 
         config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+        alert(JSON.stringify(params));
 
         $http.post(url, JSON.stringify(params), config)
             .success(function (data, status, headers, config) {
@@ -88,11 +89,37 @@ carelineApp.service('communication', function ($http, $q) {
                 ]
             };
             return hardcodedValues;
+        } else if (url == 'medications') {
+            hardcodedValues = {
+                "List": [
+                  {
+                      "MedicineID": 1,
+                      "Name": "Pill name",
+                      "MedImg": 1,
+                      "Description": "Description",
+                      "MedColor": "#956091",
+                      "MedType": "Med type",
+                      "Quantity": 1,
+                      "AccountID": 1
+                  },
+                  {
+                      "MedicineID": 2,
+                      "Name": "Pill name2",
+                      "MedImg": 1,
+                      "Description": "Description2",
+                      "MedColor": "#6b2fac",
+                      "MedType": "Med type2",
+                      "Quantity": 1,
+                      "AccountID": 1
+                  }
+                ]
+            };
+            return hardcodedValues;
         }
 
 
         var deferred = $q.defer();
-        $http.post(url, param, config)
+        $http.get(url, param, config)
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
             })

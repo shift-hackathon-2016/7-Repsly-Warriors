@@ -15,6 +15,10 @@ carelineApp.config(function ($routeProvider, $locationProvider, uiGmapGoogleMapA
             controller: 'CareReceiversController',
             templateUrl: 'src/care-receivers/care-receiver-template.html'
         })
+        .when('/medications', {
+            controller: 'MedicationsController',
+            templateUrl: 'src/medications/medications-template.html'
+        })
         .when('/settings', {
             controller: 'SettingsController',
             templateUrl: 'src/settings/settings-template.html'
