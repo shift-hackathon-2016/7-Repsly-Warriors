@@ -6,4 +6,10 @@
     <include layout="@layout/app_bar_toolbar"/>
     <include layout="@layout/receiver_header"/>
 
+    <Button
+        android:id="@+id/btnAlarm"
+        android:text="Schedule alarm!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
