@@ -12,7 +12,6 @@ import com.repsly.careline.R;
  */
 public abstract class CarelineActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +24,7 @@ public abstract class CarelineActivity extends AppCompatActivity {
         reference();
         main();
     }
+
     public abstract void main();
     public abstract void reference();
     public abstract void setUpToolbar();

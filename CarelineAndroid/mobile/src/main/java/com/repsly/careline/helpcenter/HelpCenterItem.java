@@ -9,12 +9,14 @@ public class HelpCenterItem extends ListItem {
 
     private String title;
     private String description;
+    private HelpCenterItemType type;
     private int image;
 
-    public HelpCenterItem(String title, String description, int image) {
+    public HelpCenterItem(String title, String description, int image, HelpCenterItemType type) {
         this.title = title;
         this.description = description;
         this.image = image;
+        this.type = type;
     }
 
     public String getTitle() {
@@ -39,5 +41,13 @@ public class HelpCenterItem extends ListItem {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public HelpCenterItemType getType() {
+        return type;
+    }
+
+    public void setType(HelpCenterItemType type) {
+        this.type = type;
     }
 }

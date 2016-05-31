@@ -15,7 +15,7 @@ import java.util.List;
 public class CarelineRecyclerAdapter<T extends ListItem> extends CarelineDataBinderAdapter {
 
     private List<T> items;
-    private Context activity;
+    public Context activity;
 
     public CarelineRecyclerAdapter(Context activity, List<T> items) {
         super();

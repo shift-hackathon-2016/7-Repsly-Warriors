@@ -10,6 +10,7 @@ import com.repsly.careline.R;
 import com.repsly.careline.utils.list.AdapterItem;
 import com.repsly.careline.utils.list.CarelineDataBinder;
 import com.repsly.careline.utils.list.CarelineRecyclerAdapter;
+import com.repsly.utils.lib.device.CallUtil;
 
 /**
  * Created by Alen on 31.5.2016..
@@ -69,7 +70,23 @@ public class HelpItemViewBinder extends CarelineDataBinder<HelpItemViewBinder.Vi
         public void fillDate(HelpCenterItem model) {
             title.setText(model.getTitle());
             description.setText(model.getDescription());
+            if(model.getType().equals(HelpCenterItemType.CALL)) {
+                view.setOnClickListener(listener);
+            }
         }
+
+        private View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.rlHelpItem:
+                        if(CallUtil.isCallEnabled(dataBindAdapter.getActivity())){
+                            CallUtil.startCall(dataBindAdapter.getActivity(),description.getText().toString());
+                        }
+                        break;
+                }
+            }
+        };
     }
 
     }
