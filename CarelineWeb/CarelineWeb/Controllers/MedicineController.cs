@@ -25,5 +25,10 @@ namespace CarelineWebAPI.Controllers
                 return 0;
             }
         }
+
+        public MedicineModel GetMedicine(int Id)
+        {
+            return DBOperations.GetMedicine(Id, AccountContextHelper.GetContext().AccountId);
+        }
     }
 }

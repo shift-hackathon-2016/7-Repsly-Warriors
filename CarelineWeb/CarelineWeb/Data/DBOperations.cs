@@ -35,6 +35,31 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static MedicineModel GetMedicine(int id, int accountId)
+        {
+            MedicineModel model = new MedicineModel();
+
+            using (DBConnector connector = new DBConnector("get_Medicine", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@MedicineID", id);
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Execute(DBOperation.GetReader);
+
+                if (connector.Rdr.HasRows)
+                {
+                    model.MedicineID = id;
+                    model.Name = connector.Rdr["Name"].ToString();
+                    model.Description = connector.Rdr["Description"].ToString();
+                    model.MedImg = connector.Rdr["MedImg"].ToString();
+                    model.MedColor = connector.Rdr["MedColor"].ToString();
+                    model.MedType = connector.Rdr["MedType"].ToString();
+                    model.Quantity = Convert.ToDecimal(connector.Rdr["Quantity"]);
+                }
+            }
+
+            return model;
+        }
+
         internal static int SaveMedicine(MedicineModel model, int accountId)
         {
             using (DBConnector connector = new DBConnector("save_Medicine", CommandType.StoredProcedure))
