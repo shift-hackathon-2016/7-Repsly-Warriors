@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Data\DBOperations.cs" />
     <Compile Include="Filters\BasicAuthenticationFilter.cs" />
     <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Models\AccountContext.cs" />
     <Compile Include="Models\MobileUserModel.cs" />
     <Compile Include="Models\MyGlobals.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
