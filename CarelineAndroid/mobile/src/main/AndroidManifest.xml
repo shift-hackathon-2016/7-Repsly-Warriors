@@ -13,6 +13,7 @@
         <activity android:name=".activities.LogInActivity"/>
         <activity android:name=".activities.HomeGiverActivity"/>
         <activity android:name=".activities.HomeReceiverActivity"/>
+        <activity android:name=".activities.HelpCenterActivity"/>
 
         <activity android:name=".activities.SplashActivity">
             <intent-filter>

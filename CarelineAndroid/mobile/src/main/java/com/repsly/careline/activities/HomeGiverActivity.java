@@ -9,12 +9,26 @@ import com.repsly.careline.R;
 /**
  * Created by Alen on 31.5.2016..
  */
-public class HomeGiverActivity extends AppCompatActivity {
+public class HomeGiverActivity extends CarelineActivity {
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_giver_activity);
+    public void reference() {
+
+    }
+
+    @Override
+    public void setUpToolbar() {
+
+    }
+
+    @Override
+    public int provideLayout() {
+        return R.layout.home_giver_activity;
+    }
+
+    @Override
+    public void main() {
 
     }
 }
