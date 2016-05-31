@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.repsly.careline.Model.User;
+import com.repsly.careline.model.User;
 
 /**
  * Created by tosulc on 31.05.2016..

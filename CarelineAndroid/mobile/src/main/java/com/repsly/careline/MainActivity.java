@@ -1,11 +1,9 @@
 package com.repsly.careline;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import com.repsly.careline.Model.User;
-import com.repsly.careline.database.DbHelper;
+import android.util.Log;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,9 +18,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.dada) void onDadaClick() {
-        DbHelper dbHelper = new DbHelper(getApplicationContext());
-        User user = dbHelper.getUser("fasdfasd");
-        Toast.makeText(getApplicationContext(), "User got: " + user.getName() + " is manager: " + user.isManager(), Toast.LENGTH_SHORT).show();
+        new Async().execute();
+    }
+
+    private class Async extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPostExecute(Void list) {
+            super.onPostExecute(list);
+            Log.d("Repsly debug message", "Dobio sam resposne!");
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            return null;
+        }
     }
 
 }

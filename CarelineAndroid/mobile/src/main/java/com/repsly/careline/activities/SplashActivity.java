@@ -21,6 +21,6 @@ public class SplashActivity extends SplashAbstract {
 
     @Override
     public Class getNextClassActivity() {
-        return LogInActivity.class;
+        return MainActivity.class;
     }
 }
