@@ -2,6 +2,7 @@ package com.repsly.careline.activities;
 
 import com.repsly.careline.R;
 import com.repsly.careline.database.DbHelper;
+import com.repsly.careline.helpers.AlarmHelper;
 import com.repsly.careline.helpers.gps.LocationHelper;
 import com.repsly.careline.model.User;
 import com.repsly.utils.lib.activities.abstracts.SplashAbstract;
@@ -24,6 +25,7 @@ public class SplashActivity extends SplashAbstract {
     @Override
     public Class getNextClassActivity() {
         LocationHelper.startLocationGettingProcess(getApplicationContext());
+        AlarmHelper.setAlarmForMovementTracking(getApplicationContext());
         DbHelper dbHelper = new DbHelper(this);
         User user= dbHelper.getUser();
         if(user!=null) {
