@@ -29,6 +29,7 @@
         <activity android:name=".ReminderActivity" />
         <receiver android:name=".AlarmReceiver" />
         <receiver android:name=".MovementReceiver" />
+        <service android:name=".services.MovementService"/>
     </application>
 
 </manifest>
