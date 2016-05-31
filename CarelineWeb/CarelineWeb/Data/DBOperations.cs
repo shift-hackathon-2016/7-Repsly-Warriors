@@ -35,6 +35,34 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static CareReceiverModel GetCareReceiver(int Id, int accountId)
+        {
+            CareReceiverModel model = new CareReceiverModel();
+            using (DBConnector connector = new DBConnector("get_CareReceiver", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@UserID", Id);
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Execute(DBOperation.GetReader);
+
+                if (connector.Rdr.HasRows)
+                {
+                    model.UserId = Convert.ToInt32(connector.Rdr["IDUser"]);
+                    model.UserRowId = (Guid)connector.Rdr["UserRowid"];
+                    model.AccountId = Convert.ToInt32(connector.Rdr["AccountID"]);
+                    model.AccountRowId = (Guid)connector.Rdr["AccountRowid"];
+                    model.Name = connector.Rdr["Name"].ToString();
+                    model.Address = connector.Rdr["Address"].ToString();
+                    model.Manager = (bool)connector.Rdr["Manager"];
+                    model.Avatar = connector.Rdr["Avatar"].ToString();
+                    model.Username = connector.Rdr["Username"].ToString();
+                    model.Password = connector.Rdr["Password"].ToString();
+                    model.LastMovementDateTime = (DateTime)connector.Rdr["LastMovementDateTime"];
+                }
+            }
+
+            return model;
+        }
+
         internal static UserModel GetUserByUsernamePassword(string username, string password)
         {
             UserModel user = new UserModel();

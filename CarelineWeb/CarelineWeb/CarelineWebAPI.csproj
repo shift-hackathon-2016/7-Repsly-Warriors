@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CareReceiverController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Data\DBOperations.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Helpers\AccountContextHelper.cs" />
     <Compile Include="Helpers\RequestValidationHelper.cs" />
     <Compile Include="Models\AccountContext.cs" />
+    <Compile Include="Models\CareReceiverModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MedicineConfirmationModel.cs" />
     <Compile Include="Models\UserModel.cs" />
