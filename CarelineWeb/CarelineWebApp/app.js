@@ -11,6 +11,10 @@ carelineApp.config(function ($routeProvider, $locationProvider, uiGmapGoogleMapA
             controller: 'CareReceiversController',
             templateUrl: 'src/care-receivers/care-receivers-template.html'
         })
+        .when('/receiver/:id', {
+            controller: 'CareReceiversController',
+            templateUrl: 'src/care-receivers/care-receiver-template.html'
+        })
         .otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true);

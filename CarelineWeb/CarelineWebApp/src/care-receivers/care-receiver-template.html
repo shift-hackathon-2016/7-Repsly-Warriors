@@ -1,0 +1,137 @@
+﻿<link href="src/assets/plugins/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
+<div ng-controller="CareReceiversController">    
+    <div class="row">
+        <div class="col-lg-3 text-center">
+            <img src="assets/images/users/avatar-1.jpg" class="img-responsive img-circle" alt="user" style="margin: 20px auto;">
+            <h4 class="page-title">Grandmother Zoe</h4>
+            <p>Some note about Grandmother Zoe. Doesn't need to be large text.</p>
+            <p class="text-muted m-b-5 font-13">last movement 120 mins ago</p>
+            <small class="text"><b>at home</b></small>
+        </div>
+
+        <div class="col-lg-9">
+            <ul class="nav nav-tabs navtab-custom">
+                <li class="active">
+                    <a href="#info" data-toggle="tab" aria-expanded="true">
+                        <span class="visible-xs"><i class="fa fa-home"></i></span>
+                        <span class="hidden-xs">Location</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#schedule" data-toggle="tab" aria-expanded="false">
+                        <span class="visible-xs"><i class="fa fa-user"></i></span>
+                        <span class="hidden-xs">Schedule</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#history" data-toggle="tab" aria-expanded="false">
+                        <span class="visible-xs"><i class="fa fa-envelope-o"></i></span>
+                        <span class="hidden-xs">History</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="info">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                        <ui-gmap-markers fit="true" idkey="markers.id" models="markers" coords="'coords'" click="onMarkerClicked">
+                        </ui-gmap-markers>
+                    </ui-gmap-google-map>
+                </div>
+                <div class="tab-pane" id="schedule">
+                    <div id="calendar"></div>
+                </div>
+                <div class="tab-pane" id="history">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="timeline">
+                                <article class="timeline-item alt">
+                                    <div class="text-right">
+                                        <div class="time-show first">
+                                            <a href="#" class="btn btn-primary w-lg">Today</a>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="timeline-item alt">
+                                    <div class="timeline-desk">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <span class="arrow-alt"></span>
+                                                <span class="timeline-icon"></span>
+                                                <h4 class="text-danger">Xanax</h4>
+                                                <p class="timeline-date text-muted"><small>08:25 am</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="timeline-item ">
+                                    <div class="timeline-desk">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <span class="arrow"></span>
+                                                <span class="timeline-icon"></span>
+                                                <h4 class="text-success">Marijuna Oil</h4>
+                                                <p class="timeline-date text-muted"><small>08:25 am</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="timeline-item alt">
+                                    <div class="timeline-desk">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <span class="arrow-alt"></span>
+                                                <span class="timeline-icon"></span>
+                                                <h4 class="text-primary">Viagra</h4>
+                                                <p class="timeline-date text-muted"><small>08:25 am</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="timeline-item alt">
+                                    <div class="text-right">
+                                        <div class="time-show">
+                                            <a href="#" class="btn btn-primary w-lg">Yesterday</a>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="timeline-item">
+                                    <div class="timeline-desk">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <span class="arrow"></span>
+                                                <span class="timeline-icon"></span>
+                                                <h4 class="text-warning">07 January 2016</h4>
+                                                <p class="timeline-date text-muted"><small>08:25 am</small></p>
+                                                <p>
+                                                    Montly Regular Medical check up at Greenland Hospital by the
+                                                    doctor <span><a href="#"> Johm meon </a></span>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='src/assets/moment/moment.js'></script>
+<script src='src/assets/plugins/fullcalendar/dist/fullcalendar.min.js'></script>
+<script src="src/assets/pages/jquery.fullcalendar.js"></script>
+
+<!--<script src="assets/js/jquery.app.js"></script>-->
+<!--
+<script>
+    $(function () {
+        var lastMovement = $('#last-movement').data('time'); 
+        var ago = moment(lastMovement).fromNow();
+        $('#last-movement').text(ago);
+    })
+</script>-->

@@ -1,4 +1,4 @@
-﻿carelineApp.controller('DashboardController', function ($scope, uiGmapGoogleMapApi, dashboard) {
+﻿carelineApp.controller('DashboardController', function ($scope, uiGmapGoogleMapApi, dashboard, googleMaps) {
     //prepare map
     $scope.map = {
         center:
@@ -12,9 +12,9 @@
 
     uiGmapGoogleMapApi.then(function (maps) {
         $scope.options = { scrollwheel: false };
-        $scope.markers = dashboard.getMarkers();
-        dashboard.registerEvents($scope.markers);
-        $scope.onMarkerClicked = dashboard.onMarkerClicked;
+        $scope.markers = googleMaps.getMarkers();
+        googleMaps.registerEvents($scope.markers);
+        $scope.onMarkerClicked = googleMaps.onMarkerClicked;
     })
 
 })
