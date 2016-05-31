@@ -16,11 +16,11 @@ public class SplashActivity extends SplashAbstract {
 
     @Override
     public int getSplashTime() {
-        return 2000;
+        return 700;
     }
 
     @Override
     public Class getNextClassActivity() {
-        return MainActivity.class;
+        return LogInActivity.class;
     }
 }
