@@ -19,20 +19,24 @@ import java.util.Date;
  */
 public class MovementService extends Service {
 
+    private boolean start=false;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        MovementDetector.getInstance(this).addListener(new MotionListener() {
+        if(!start) {
+            MovementDetector.getInstance(this).addListener(new MotionListener() {
 
-            @Override
-            public void onMotionDetected(SensorEvent event, float acceleration) {
-                String currentDateandTime = DateTimeUtil.toISODate(new Date());
-                Remember.putString(Constants.MOTION_TIME, currentDateandTime);
-            }
-        });
+                @Override
+                public void onMotionDetected(SensorEvent event, float acceleration) {
+                    String currentDateandTime = DateTimeUtil.toISODate(new Date());
+                    Remember.putString(Constants.MOTION_TIME, currentDateandTime);
+                }
+            });
 
-        MovementDetector.getInstance(this).start();
+            MovementDetector.getInstance(this).start();
+            start = true;
+        }
     }
 
     @Nullable
