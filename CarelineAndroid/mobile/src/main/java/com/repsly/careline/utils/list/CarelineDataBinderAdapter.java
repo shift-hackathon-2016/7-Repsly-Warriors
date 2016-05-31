@@ -12,6 +12,7 @@ public abstract class CarelineDataBinderAdapter extends
         RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     final static int HELP_ITEM = 1;
+    final static int RECEIVER_ITEM = 2;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
