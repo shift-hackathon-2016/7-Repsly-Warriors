@@ -12,7 +12,7 @@ public class AnimationHelper {
 
     public static void fadeOutView(final View v, float from, float to) {
         AlphaAnimation animation = new AlphaAnimation(from, to);
-        animation.setDuration(2000);
+        animation.setDuration(500);
         animation.setInterpolator(new DecelerateInterpolator());
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override

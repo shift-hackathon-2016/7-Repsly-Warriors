@@ -32,13 +32,6 @@ public class MainActivity extends AppCompatActivity {
         DbHelper dbHelper = new DbHelper(getApplicationContext());
         User user = dbHelper.getUser("");
         Toast.makeText(getApplicationContext(), "User: " + user.isManager(), Toast.LENGTH_SHORT).show();*/
-        Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-        Date d = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(d);
-        cal.add(Calendar.MILLISECOND, 3000);
-        AlarmHelper.setOneTimeAlarmOnDate(getApplication(), pi, cal.getTime());
     }
 
     private class Async extends AsyncTask<Void, Void, Void> {

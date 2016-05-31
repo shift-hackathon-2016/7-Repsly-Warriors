@@ -1,7 +1,8 @@
 package com.repsly.careline.activities;
 
-import com.repsly.careline.MainActivity;
 import com.repsly.careline.R;
+import com.repsly.careline.database.DbHelper;
+import com.repsly.careline.model.User;
 import com.repsly.utils.lib.activities.abstracts.SplashAbstract;
 
 /**
@@ -21,6 +22,14 @@ public class SplashActivity extends SplashAbstract {
 
     @Override
     public Class getNextClassActivity() {
-        return MainActivity.class;
+        DbHelper dbHelper = new DbHelper(this);
+        User user= dbHelper.getUser();
+        if(user!=null) {
+            if(user.isManager()){
+                return HomeGiverActivity.class;
+            }
+            return HomeReceiverActivity.class;
+        }
+        return LogInActivity.class;
     }
 }
