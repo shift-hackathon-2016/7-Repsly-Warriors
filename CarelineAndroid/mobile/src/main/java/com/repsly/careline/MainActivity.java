@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.dada) void onDadaClick() {
         DbHelper dbHelper = new DbHelper(getApplicationContext());
-        User user = dbHelper.getUser("fasdfasd");
+        User user = dbHelper.getUser();
         Toast.makeText(getApplicationContext(), "User got: " + user.getName() + " is manager: " + user.isManager(), Toast.LENGTH_SHORT).show();
     }
 
