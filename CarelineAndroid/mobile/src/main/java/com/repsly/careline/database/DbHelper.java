@@ -28,7 +28,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
         //TODO insert some dummy data
         db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Adresa babe', '0')");
-
+        db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
+        db.execSQL("Insert into ScheduleItem values('1','1','1','20')");
+        db.execSQL("Insert into Medicine values('1','Lupocet','luda tableta')");
     }
 
     @Override
@@ -70,6 +72,14 @@ public class DbHelper extends SQLiteOpenHelper {
             c.close();
         }
         return user;
+    }
+
+    public void getScheduleForToday() {
+        /*
+        select s.datetime, s.note,m.name, m.type from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId
+left join Medicine as m on si.medicineId = m.id
+where datetime like '%2016-05-31%'
+         */
     }
 
 }
