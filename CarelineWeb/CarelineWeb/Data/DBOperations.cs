@@ -35,6 +35,28 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static int SaveCareReceiver(CareReceiverModel model, int accountId)
+        {
+            using (DBConnector connector = new DBConnector("save_CareReceiver", CommandType.StoredProcedure))
+            {
+                SqlParameter IDParam = new SqlParameter("@UserID", SqlDbType.Int);
+                IDParam.Direction = ParameterDirection.InputOutput;
+                IDParam.Value = model.UserId;
+                connector.Cmd.Parameters.Add(IDParam);
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Cmd.Parameters.AddWithValue("@Name", model.Name);
+                connector.Cmd.Parameters.AddWithValue("@Address", model.Address);
+                connector.Cmd.Parameters.AddWithValue("@Email", model.Email);
+                connector.Cmd.Parameters.AddWithValue("@Note", model.Note);
+                connector.Cmd.Parameters.AddWithValue("@Username", model.Username);
+                connector.Cmd.Parameters.AddWithValue("@Password", model.Password);
+
+                connector.Execute(DBOperation.SaveWithOutput);
+
+                return Convert.ToInt32(connector.Cmd.Parameters["@UserID"].Value);
+            }
+        }
+
         internal static CareReceiverModel GetCareReceiver(int Id, int accountId)
         {
             CareReceiverModel model = new CareReceiverModel();

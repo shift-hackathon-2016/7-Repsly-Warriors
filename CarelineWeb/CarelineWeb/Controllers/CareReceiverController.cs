@@ -19,5 +19,18 @@ namespace CarelineWebAPI.Controllers
         {
             return DBOperations.GetCareReceiver(Id, AccountContextHelper.GetContext().AccountId);
         }
+
+        [HttpPost]
+        public int SaveCareReceiver([FromBody] CareReceiverModel model)
+        {
+            try
+            {
+                return DBOperations.SaveCareReceiver(model, AccountContextHelper.GetContext().AccountId);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
     }
 }

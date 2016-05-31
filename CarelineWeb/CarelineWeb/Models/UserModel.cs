@@ -13,6 +13,7 @@ namespace CarelineWebAPI.Models
         public Guid AccountRowId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public string Email { get; set; }
         public bool Manager { get; set; }
         public string Avatar { get; set; }
     }
