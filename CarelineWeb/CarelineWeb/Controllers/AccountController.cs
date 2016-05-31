@@ -1,4 +1,6 @@
 ﻿using CarelineWebAPI.Data;
+using CarelineWebAPI.Filters;
+using CarelineWebAPI.Helpers;
 using CarelineWebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -11,11 +13,11 @@ namespace CarelineWebAPI.Controllers
 {
     public class AccountController : ApiController
     {
-        public MobileUserModel GetUserData()
+        [MyBasicAuthenticationFilter]
+        [HttpGet]
+        public MobileUserModel MobileGetUserData()
         {
-            string username = string.Empty;
-            string password = string.Empty;
-            return DBOperations.MobileGetUserData(username, password);
+            return DBOperations.GetUserDataByUserID(AccountContextHelper.GetContext().UserID);
         }
 
         // GET: api/Account

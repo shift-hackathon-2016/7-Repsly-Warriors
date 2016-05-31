@@ -140,10 +140,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Data\DBOperations.cs" />
+    <Compile Include="Filters\BasicAuthenticationFilter.cs" />
+    <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
+    <Compile Include="Filters\MyBasicAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccountContextHelper.cs" />
+    <Compile Include="Helpers\RequestValidationHelper.cs" />
+    <Compile Include="Models\AccountContext.cs" />
     <Compile Include="Models\MobileUserModel.cs" />
+    <Compile Include="Models\MyGlobals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

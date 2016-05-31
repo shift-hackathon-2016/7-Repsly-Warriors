@@ -11,20 +11,23 @@ namespace CarelineWebAPI.Data
 {
     public class DBOperations
     {
-        internal static MobileUserModel MobileGetUserData(string username, string password)
+        internal static MobileUserModel GetUserDataByUserID(int userId)
         {
             MobileUserModel model = new MobileUserModel();
 
-            using (DBConnector connector = new DBConnector("get_UserData", CommandType.StoredProcedure))
+            using (DBConnector connector = new DBConnector("get_UserDataByUserID", CommandType.StoredProcedure))
             {
-                connector.Cmd.Parameters.AddWithValue("@Username", username);
-                connector.Cmd.Parameters.AddWithValue("@Password", password);
+                connector.Cmd.Parameters.AddWithValue("@UserID", userId);
                 connector.Execute(DBOperation.GetReader);
 
-                if(connector.Rdr.HasRows)
+                if (connector.Rdr.HasRows)
                 {
-                    connector.Rdr.Read();
-
+                    model.UserRowId = (Guid)connector.Rdr["UserRowid"];
+                    model.AccountRowId = (Guid)connector.Rdr["AccountRowid"];
+                    model.Name = connector.Rdr["Name"].ToString();
+                    model.Address = connector.Rdr["Address"].ToString();
+                    model.Manager = (bool)connector.Rdr["Manager"];
+                    model.Avatar = connector.Rdr["Avatar"].ToString();
                 }
             }
 

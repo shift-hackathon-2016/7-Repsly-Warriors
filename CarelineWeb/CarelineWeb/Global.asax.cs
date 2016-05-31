@@ -19,5 +19,13 @@ namespace CarelineWebAPI
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);            
         }
+
+        void Application_End()
+        {
+            if (HttpContext.Current.Session["AccountContext"] != null)
+            {
+                HttpContext.Current.Session.Abandon();
+            }
+        }
     }
 }
