@@ -1,5 +1,7 @@
 package com.repsly.careline.helpcenter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,23 +72,34 @@ public class HelpItemViewBinder extends CarelineDataBinder<HelpItemViewBinder.Vi
         public void fillDate(HelpCenterItem model) {
             title.setText(model.getTitle());
             description.setText(model.getDescription());
-            if(model.getType().equals(HelpCenterItemType.CALL)) {
-                view.setOnClickListener(listener);
+            if (model.getType().equals(HelpCenterItemType.CALL)) {
+                view.setOnClickListener(callListener);
+            }else if(model.getType().equals(HelpCenterItemType.NAVIGATION)){
+                view.setOnClickListener(mapListener);
             }
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private View.OnClickListener callListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()){
-                    case R.id.rlHelpItem:
-                        if(CallUtil.isCallEnabled(dataBindAdapter.getActivity())){
-                            CallUtil.startCall(dataBindAdapter.getActivity(),description.getText().toString());
-                        }
-                        break;
+                if (CallUtil.isCallEnabled(dataBindAdapter.getActivity())) {
+                    CallUtil.startCall(dataBindAdapter.getActivity(),
+                                       description.getText().toString());
                 }
             }
         };
-    }
+
+        private View.OnClickListener mapListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=43.5196138,16.4143467&mode=w");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                dataBindAdapter.getActivity().startActivity(mapIntent);
+            }
+        };
+
 
     }
+
+}
