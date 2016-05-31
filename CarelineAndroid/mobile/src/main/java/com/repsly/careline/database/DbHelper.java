@@ -6,7 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.repsly.careline.model.ReminderScheduleItem;
+import com.repsly.careline.model.Schedule;
 import com.repsly.careline.model.User;
+
+import java.util.ArrayList;
 
 /**
  * Created by tosulc on 31.05.2016..
@@ -30,7 +34,9 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Adresa babe', '0')");
         db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
         db.execSQL("Insert into ScheduleItem values('1','1','1','20')");
+        db.execSQL("Insert into ScheduleItem values('2','1','2','102')");
         db.execSQL("Insert into Medicine values('1','Lupocet','luda tableta')");
+        db.execSQL("Insert into Medicine values('2','Luda tableta','Note za ludoj tableti')");
     }
 
     @Override
@@ -74,12 +80,28 @@ public class DbHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public void getScheduleForToday() {
-        /*
-        select s.datetime, s.note,m.name, m.type from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId
-left join Medicine as m on si.medicineId = m.id
-where datetime like '%2016-05-31%'
-         */
+    public ArrayList<ReminderScheduleItem> getScheduleForToday() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c;
+        boolean hadRecods;
+        ArrayList<ReminderScheduleItem> scheduleItems = new ArrayList<>();
+        c = db.rawQuery("select s.datetime, m.name, m.type, si.quantity from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId\n" +
+                                "left join Medicine as m on si.medicineId = m.id", null);
+        if (c != null) {
+            hadRecods = c.moveToFirst();
+            while (hadRecods) {
+                ReminderScheduleItem rsi = new ReminderScheduleItem();
+                rsi.name = c.getString(c.getColumnIndex("name"));
+                rsi.dateTime = c.getString(c.getColumnIndex("dateTime"));
+                //rsi.note = c.getString(c.getColumnIndex("note"));
+                rsi.quantity = c.getString(c.getColumnIndex("quantity"));
+                rsi.type = c.getString(c.getColumnIndex("type"));
+                scheduleItems.add(rsi);
+                hadRecods = c.moveToNext();
+            }
+            c.close();
+        }
+        return scheduleItems;
     }
 
 }
