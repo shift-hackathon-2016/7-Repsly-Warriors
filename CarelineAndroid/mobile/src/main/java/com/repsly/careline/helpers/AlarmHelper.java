@@ -3,6 +3,11 @@ package com.repsly.careline.helpers;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import com.repsly.careline.AlarmReceiver;
+import com.repsly.careline.MovementReceiver;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +37,16 @@ public class AlarmHelper {
         calendar.setTime(d);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), i);
 
+    }
+
+    public static void setAlarmForMovementTracking(Context c) {
+        Intent i = new Intent(c, MovementReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(c, 0, i, 0);
+        AlarmManager am = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+        am.cancel(pi); //we stop the previous alarms so there won't be any alarms working in parallel
+        //TODO do not hardcode this! For now, every minute, send!
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000,
+                        60000, pi);
     }
 
     //TODO implement recurring alarms?

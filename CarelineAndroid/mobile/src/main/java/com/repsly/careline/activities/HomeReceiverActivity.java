@@ -2,13 +2,18 @@ package com.repsly.careline.activities;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.repsly.careline.AlarmReceiver;
+import com.repsly.careline.CarelineApplication;
 import com.repsly.careline.R;
 import com.repsly.careline.helpers.AlarmHelper;
+import com.repsly.careline.helpers.gps.LocationHelper;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -62,6 +67,23 @@ public class HomeReceiverActivity extends CarelineActivity {
         cal.setTime(d);
         cal.add(Calendar.MILLISECOND, 3000);
         AlarmHelper.setOneTimeAlarmOnDate(getApplication(), pi, cal.getTime());
+    }
+
+    @OnClick(R.id.btnLocation)
+    void getLocation() {
+        Location lastGpsLocation = LocationHelper.getLastFoundLocation();
+        if (lastGpsLocation != null) {
+            Toast.makeText(getApplicationContext(),
+                           "Latitude: " + lastGpsLocation
+                                   .getLatitude() + ", longitude: " + lastGpsLocation
+                                   .getLongitude(), Toast.LENGTH_SHORT).show();
+            Log.d("Repsly debug message",
+                  "Latitude: " + lastGpsLocation.getLatitude());
+            Log.d("Repsly debug message",
+                  "Longitude: " + lastGpsLocation.getLongitude());
+        } else {
+            Toast.makeText(getApplicationContext(), "Location null!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
