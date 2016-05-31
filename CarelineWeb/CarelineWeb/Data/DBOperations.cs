@@ -12,9 +12,9 @@ namespace CarelineWebAPI.Data
 {
     public class DBOperations
     {
-        internal static MobileUserModel GetUserDataByUserID(int userId)
+        internal static UserModel GetUserDataByUserID(int userId)
         {
-            MobileUserModel model = new MobileUserModel();
+            UserModel model = new UserModel();
 
             using (DBConnector connector = new DBConnector("get_UserDataByUserID", CommandType.StoredProcedure))
             {
@@ -33,6 +33,31 @@ namespace CarelineWebAPI.Data
             }
 
             return model;
+        }
+
+        internal static UserModel GetUserByUsernamePassword(string username, string password)
+        {
+            UserModel user = new UserModel();
+            using (DBConnector connector = new DBConnector("get_UserByUsernamePassword", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@Username", username);
+                connector.Cmd.Parameters.AddWithValue("@Password", password);
+                connector.Execute(DBOperation.GetReader);
+
+                if (connector.Rdr.HasRows)
+                {
+                    user.UserId = Convert.ToInt32(connector.Rdr["IDUser"]);
+                    user.UserRowId = (Guid)connector.Rdr["UserRowid"];
+                    user.AccountId = Convert.ToInt32(connector.Rdr["AccountID"]);
+                    user.AccountRowId = (Guid)connector.Rdr["AccountRowid"];
+                    user.Name = connector.Rdr["Name"].ToString();
+                    user.Address = connector.Rdr["Address"].ToString();
+                    user.Manager = (bool)connector.Rdr["Manager"];
+                    user.Avatar = connector.Rdr["Avatar"].ToString();
+                }
+            }
+
+            return user;
         }
 
         internal static int RegisterAccount(RegistrationModel model)

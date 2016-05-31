@@ -1,4 +1,5 @@
-﻿using CarelineWebAPI.Models;
+﻿using CarelineWebAPI.Data;
+using CarelineWebAPI.Models;
 using DBLayer;
 using System;
 using System.Collections.Generic;
@@ -12,24 +13,19 @@ namespace CarelineWebAPI.Helpers
     {
         public static bool ValidateUser(string username, string password)
         {
-            using (DBConnector connector = new DBConnector("get_UserByUsernamePassword", CommandType.StoredProcedure))
+            UserModel user = DBOperations.GetUserByUsernamePassword(username, password);
+
+            if (user.UserId > 0)
             {
-                connector.Cmd.Parameters.AddWithValue("@Username", username);
-                connector.Cmd.Parameters.AddWithValue("@Password", password);
-                connector.Execute(DBOperation.GetReader);
+                AccountContext context = new AccountContext();
 
-                if (connector.Rdr.HasRows)
-                {
-                    AccountContext context = new AccountContext();
+                context.UserId = user.UserId;
+                context.AccountId = user.AccountId;
+                context.Manager = user.Manager;
 
-                    context.UserId = Convert.ToInt32(connector.Rdr["IDUser"]);
-                    context.AccountId = Convert.ToInt32(connector.Rdr["AccountID"]);
-                    context.Manager = (bool)connector.Rdr["Manager"];
+                AccountContextHelper.SetContext(context);
 
-                    AccountContextHelper.SetContext(context);
-
-                    return true;
-                }
+                return true;
             }
 
             return false;

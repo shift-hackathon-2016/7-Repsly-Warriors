@@ -15,7 +15,7 @@ namespace CarelineWebAPI.Controllers
     {
         [MyBasicAuthenticationFilter]
         [HttpGet]
-        public MobileUserModel MobileGetUserData()
+        public UserModel MobileGetUserData()
         {
             return DBOperations.GetUserDataByUserID(AccountContextHelper.GetContext().UserId);
         }
@@ -30,6 +30,11 @@ namespace CarelineWebAPI.Controllers
             {
                 return 0;
             }
+        }
+
+        public UserModel Login([FromBody] LoginModel model)
+        {
+            return DBOperations.GetUserByUsernamePassword(model.username, model.password);
         }
     }
 }

@@ -5,9 +5,11 @@ using System.Web;
 
 namespace CarelineWebAPI.Models
 {
-    public class MobileUserModel
+    public class UserModel
     {
+        public int UserId { get; set; }
         public Guid UserRowId { get; set; }
+        public int AccountId { get; set; }
         public Guid AccountRowId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
