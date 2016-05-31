@@ -2,4 +2,8 @@
 
     $scope.receivers = receivers.getAllReceivers();
 
+    $scope.addCareReceiver = function () {
+        receivers.addCareReceiver($scope);
+    }
+
 })

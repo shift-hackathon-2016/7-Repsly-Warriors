@@ -11,14 +11,17 @@ carelineApp.service('communication', function ($http, $q) {
     }
 
     //POST
-    this.ajaxPost = function (url, param) {
+    this.ajaxPost = function (url, params) {
         var deferred = $q.defer();
-        $http.post(url, param, config)
+
+        config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+
+        $http.post(url, JSON.stringify(params), config)
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
             })
             .error(function (data, status) {
-                alert(status);
+                alert(data);
             });
         return deferred.promise;
     }
@@ -89,7 +92,7 @@ carelineApp.service('communication', function ($http, $q) {
 
 
         var deferred = $q.defer();
-        $http.get(url, param, config)
+        $http.post(url, param, config)
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
             })
