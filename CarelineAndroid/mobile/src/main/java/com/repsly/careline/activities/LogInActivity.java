@@ -12,6 +12,7 @@ import com.repsly.careline.MainActivity;
 import com.repsly.careline.R;
 import com.repsly.careline.database.DbHelper;
 import com.repsly.careline.helpers.AuthHelper;
+import com.repsly.careline.helpers.Constants;
 import com.repsly.careline.interfaces.ILogin;
 import com.repsly.careline.model.network.UserData;
 import com.repsly.careline.retrofit.ApiCarelineImpl;
@@ -37,8 +38,8 @@ public class LogInActivity extends LogInAbstract implements ILogin {
         /*String credentials = username + ":" + password;
         final String basic =
                 "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);*/
-        String data = AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec");
-        ApiCarelineImpl service = new ApiCarelineImpl("http://api.carelineapp.me/")
+        String data = AuthHelper.encodeBase64String("ahuskanovic" + ":" + "12ahuskanovic");
+        ApiCarelineImpl service = new ApiCarelineImpl()
                 .buildInterceptor().addAuthHeader(data);
         service.sendLoginData(this);
         /*if(validateData()) {
@@ -60,10 +61,10 @@ public class LogInActivity extends LogInAbstract implements ILogin {
         if (userData != null) {
             DbHelper dbHelper = CarelineApplication.getDbHandler();
             dbHelper.saveUser(userData);
-            Remember.putBoolean("loggedIn", true);
-            Remember.putBoolean("isManager", userData.manager);
-            Remember.putString("loginData",
-                               AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec"));
+            Remember.putBoolean(Constants.LOGGED_IN, true);
+            Remember.putBoolean(Constants.IS_MANAGER, userData.manager);
+            Remember.putString(Constants.LOGIN_DATA,
+                               AuthHelper.encodeBase64String("ahuskanovic" + ":" + "12ahuskanovic"));
             Intent i;
             if (userData.manager) {
                 i = new Intent(getApplicationContext(), HomeGiverActivity.class);

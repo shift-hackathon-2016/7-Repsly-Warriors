@@ -16,11 +16,14 @@ public abstract class CarelineActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(provideLayout());
+        /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (getSupportActionBar()!=null){
             setSupportActionBar(toolbar);
         }
+        */
         setUpToolbar();
+
         reference();
         main();
     }

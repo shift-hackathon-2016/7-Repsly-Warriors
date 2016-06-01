@@ -3,6 +3,7 @@ package com.repsly.careline.retrofit;
 import android.util.Base64;
 
 import com.repsly.careline.interfaces.ILogin;
+import com.repsly.careline.model.CareReceiver;
 import com.repsly.careline.model.User;
 import com.repsly.careline.model.network.ServerStatus;
 import com.repsly.careline.model.network.UserData;
@@ -10,6 +11,7 @@ import com.repsly.careline.model.network.UserPassModel;
 import com.repsly.careline.retrofit.interfaces.ApiCarelineInterface;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -26,11 +28,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ApiCarelineImpl {
 
-    String url;
+    String url = "http://api.carelineapp.me/";
     OkHttpClient.Builder client;
 
-    public ApiCarelineImpl(String url) {
-        this.url = url;
+    public ApiCarelineImpl() {
     }
 
     public ApiCarelineImpl buildInterceptor() {
@@ -89,6 +90,22 @@ public class ApiCarelineImpl {
                 login.LoginResult(null);
             }
         });
+    }
+
+    public List<CareReceiver> getRecevierList() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
+        ApiCarelineInterface apiCarelineService = retrofit.create(ApiCarelineInterface.class);
+        Call<List<CareReceiver>> receivers = apiCarelineService.getReceiverList();
+        try {
+            return receivers.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

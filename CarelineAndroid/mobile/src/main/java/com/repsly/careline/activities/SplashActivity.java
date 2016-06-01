@@ -27,7 +27,6 @@ public class SplashActivity extends SplashAbstract {
     public Class getNextClassActivity() {
         LocationHelper.startLocationGettingProcess(getApplicationContext());
         AlarmHelper.setAlarmForMovementTracking(getApplicationContext());
-
         boolean loggedIn = Remember.getBoolean("loggedIn", false);
         boolean isManager = Remember.getBoolean("isManager", false);
         if (loggedIn) {

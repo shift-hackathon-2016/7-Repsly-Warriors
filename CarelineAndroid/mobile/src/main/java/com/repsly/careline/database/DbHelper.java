@@ -32,6 +32,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         //TODO insert some dummy data
         /*db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Adresa babe', '0')");
+        db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Velebitska 78, Split, Croatia', '0')");
         db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
         db.execSQL("Insert into ScheduleItem values('1','1','1','20')");
         db.execSQL("Insert into ScheduleItem values('2','1','2','102')");

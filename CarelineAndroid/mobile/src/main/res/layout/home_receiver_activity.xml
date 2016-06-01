@@ -3,7 +3,6 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <include layout="@layout/app_bar_toolbar"/>
     <include layout="@layout/receiver_header"/>
 
     <Button
