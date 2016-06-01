@@ -13,6 +13,7 @@ public abstract class CarelineDataBinderAdapter extends
 
     final static int HELP_ITEM = 1;
     final static int RECEIVER_ITEM = 2;
+    final static int SCHEDULE_ITEM = 3;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

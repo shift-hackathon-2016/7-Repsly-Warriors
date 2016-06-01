@@ -5,8 +5,10 @@ import android.content.Context;
 import com.repsly.careline.helpcenter.HelpCenterItem;
 import com.repsly.careline.helpcenter.HelpItemViewBinder;
 import com.repsly.careline.model.CareReceiver;
+import com.repsly.careline.model.ReminderScheduleItem;
 import com.repsly.careline.receivers.ReceiverItemViewBinder;
 import com.repsly.careline.receivers.ReceiverListItem;
+import com.repsly.careline.schedule.ScheduleItemViewBinder;
 import com.repsly.utils.lib.list.DataBinder;
 import com.repsly.utils.lib.list.ListItem;
 
@@ -50,6 +52,8 @@ public class CarelineRecyclerAdapter<T extends ListItem> extends CarelineDataBin
             return HELP_ITEM;
         } else if (items.get(position) instanceof CareReceiver){
            return RECEIVER_ITEM;
+       }else if (items.get(position) instanceof ReminderScheduleItem){
+           return SCHEDULE_ITEM;
        }
         return 0;
     }
@@ -62,6 +66,8 @@ public class CarelineRecyclerAdapter<T extends ListItem> extends CarelineDataBin
                 return (T) new HelpItemViewBinder(this);
            case RECEIVER_ITEM:
                return (T) new ReceiverItemViewBinder(this);
+           case SCHEDULE_ITEM:
+               return (T) new ScheduleItemViewBinder(this);
             default:
                 return null;
         }

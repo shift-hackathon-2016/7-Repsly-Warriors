@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.location.Address;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -77,8 +76,11 @@ public class ReceiverItemViewBinder extends CarelineDataBinder<ReceiverItemViewB
         @Override
         public void fillDate(CareReceiver model) {
             tvName.setText(model.getName());
-            tvDescription.setText("Last movement: " + DateTimeUtil.getTimeAgo(DateTimeUtil.fromISODate(model.getLastMovement()),dataBindAdapter.getActivity()));
-            address=model.getAddress();
+            tvDescription.setText("Last movement: " + DateTimeUtil
+                    .getTimeAgo(DateTimeUtil.fromISODate(model.getLastMovement()),
+                                dataBindAdapter.getActivity()));
+            address = model.getAddress();
+            avatar.setImageResource(R.mipmap.avatar_grandpa);
         }
 
         private View.OnClickListener listener = new View.OnClickListener() {
@@ -87,7 +89,8 @@ public class ReceiverItemViewBinder extends CarelineDataBinder<ReceiverItemViewB
             public void onClick(View view) {
                 Address adr = GeocoderHelper.getFromAddress(dataBindAdapter.getActivity(), address);
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri
-                        .parse("http://maps.google.com/maps?q=loc:" + adr.getLatitude() + "," + adr.getLongitude()));
+                        .parse("http://maps.google.com/maps?q=loc:" + adr.getLatitude() + "," + adr
+                                .getLongitude()));
                 dataBindAdapter.getActivity().startActivity(i);
 
             }

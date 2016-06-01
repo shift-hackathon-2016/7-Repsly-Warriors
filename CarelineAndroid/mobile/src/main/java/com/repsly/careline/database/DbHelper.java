@@ -192,6 +192,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 rsi.quantity = c.getString(c.getColumnIndex("quantity"));
                 rsi.medColor = c.getString(c.getColumnIndex("medColor"));
                 rsi.type = c.getString(c.getColumnIndex("medType"));
+                rsi.medColor = c.getString(c.getColumnIndex("medColor"));
                 scheduleItems.add(rsi);
                 hadRecods = c.moveToNext();
             }

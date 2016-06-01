@@ -33,15 +33,20 @@ public class LogInActivity extends CereLogInAbstract implements ILogin {
 
     @Override
     public void submitAction() {
-        //if (username.getText().length() > 0 && password.getText().length() > 0) {
         //TODO uncomment this!
         /*String credentials = username + ":" + password;
         final String basic =
                 "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);*/
-        String data = AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec");
-        ApiCarelineImpl service = new ApiCarelineImpl()
-                .buildInterceptor().addAuthHeader(data);
-        service.sendLoginData(this);
+        if (validateData()) {
+            String data = AuthHelper.encodeBase64String(
+                    username.getText().toString() + ":" + password.getText().toString());
+            ApiCarelineImpl service = new ApiCarelineImpl()
+                    .buildInterceptor().addAuthHeader(data);
+            service.sendLoginData(this);
+        } else {
+            Toast.makeText(getApplicationContext(), "You need to input data to log in.",
+                           Toast.LENGTH_SHORT).show();
+        }
         /*if(validateData()) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -64,7 +69,10 @@ public class LogInActivity extends CereLogInAbstract implements ILogin {
             Remember.putBoolean(Constants.LOGGED_IN, true);
             Remember.putBoolean(Constants.IS_MANAGER, userData.manager);
             Remember.putString(Constants.LOGIN_DATA,
-                               AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec"));
+                               AuthHelper
+                                       .encodeBase64String(
+                                               username.getText().toString() + ":" + password
+                                                       .getText().toString()));
             Intent i;
             if (userData.manager) {
                 i = new Intent(getApplicationContext(), HomeGiverActivity.class);
