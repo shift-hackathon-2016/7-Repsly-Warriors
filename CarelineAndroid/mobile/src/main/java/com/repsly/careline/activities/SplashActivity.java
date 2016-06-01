@@ -37,7 +37,7 @@ public class SplashActivity extends CareSplashAbstract {
 
     @Override
     public Class getNextClassActivity() {
-  /*      LocationHelper.startLocationGettingProcess(getApplicationContext());
+        LocationHelper.startLocationGettingProcess(getApplicationContext());
         AlarmHelper.setAlarmForMovementTracking(getApplicationContext());
         boolean loggedIn = Remember.getBoolean("loggedIn", false);
         boolean isManager = Remember.getBoolean("isManager", false);
@@ -47,6 +47,6 @@ public class SplashActivity extends CareSplashAbstract {
             }
             return HomeReceiverActivity.class;
         }
-*/        return LogInActivity.class;
+        return LogInActivity.class;
     }
 }
