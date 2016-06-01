@@ -36,7 +36,7 @@ public class AlarmHelper {
         AlarmManager am = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(d);
-        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), i);
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, i);
 
     }
 

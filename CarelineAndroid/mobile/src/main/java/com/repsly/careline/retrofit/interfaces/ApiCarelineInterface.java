@@ -1,6 +1,7 @@
 package com.repsly.careline.retrofit.interfaces;
 
 import com.repsly.careline.model.CareReceiver;
+import com.repsly.careline.model.Medicine;
 import com.repsly.careline.model.MedicineConfirmation;
 import com.repsly.careline.model.Schedule;
 import com.repsly.careline.model.User;
@@ -24,15 +25,18 @@ public interface ApiCarelineInterface  {
     @GET("/api/Account/MobileGetUserData")
     Call<UserData> sendUserPass();
 
-
     @GET("/api/CareReceiver/GetList")
     Call<List<CareReceiver>> getReceiverList();
 
+    @GET("/api/Schedule/GetScheduleForMobileUser")
+    Call<List<Schedule>> getScheduleForMobileUser(); //getting schedule and schedule items
+
+    @GET("/api/Medicine/GetList")
+    Call<List<Medicine>> getMedicine();
+
+
     @GET
     Call<User> getUserData(@Path("userId") String userId);
-
-    @GET("/api/Schedule/GetScheduleForMobileUser")
-    Call<Schedule> getScheduleForMobileUser(); //getting schedule and schedule items
 
     @POST("/api/Schedule/MedicineConfirmation")
     Call<Void> sendMedicineConformation(@Body MedicineConfirmation mc);

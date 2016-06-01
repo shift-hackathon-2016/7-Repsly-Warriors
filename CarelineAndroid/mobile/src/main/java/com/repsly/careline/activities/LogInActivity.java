@@ -38,7 +38,7 @@ public class LogInActivity extends LogInAbstract implements ILogin {
         /*String credentials = username + ":" + password;
         final String basic =
                 "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);*/
-        String data = AuthHelper.encodeBase64String("ahuskanovic" + ":" + "12ahuskanovic");
+        String data = AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec");
         ApiCarelineImpl service = new ApiCarelineImpl()
                 .buildInterceptor().addAuthHeader(data);
         service.sendLoginData(this);
@@ -64,7 +64,7 @@ public class LogInActivity extends LogInAbstract implements ILogin {
             Remember.putBoolean(Constants.LOGGED_IN, true);
             Remember.putBoolean(Constants.IS_MANAGER, userData.manager);
             Remember.putString(Constants.LOGIN_DATA,
-                               AuthHelper.encodeBase64String("ahuskanovic" + ":" + "12ahuskanovic"));
+                               AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec"));
             Intent i;
             if (userData.manager) {
                 i = new Intent(getApplicationContext(), HomeGiverActivity.class);

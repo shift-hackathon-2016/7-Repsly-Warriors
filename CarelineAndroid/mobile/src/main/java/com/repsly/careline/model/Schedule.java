@@ -10,16 +10,16 @@ import java.util.Date;
  * Created by tosulc on 31.05.2016..
  */
 public class Schedule {
-    @SerializedName("id")
+    @SerializedName("ScheduleRowid")
     @Expose
     public String id;
-    @SerializedName("dateTime")
+    @SerializedName("ScheduleDateTime")
     @Expose
-    public Date dateTime;
-    @SerializedName("scheduleItems")
+    public String dateTime;
+    @SerializedName("ScheduleItemList")
     @Expose
     public ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
-    @SerializedName("note")
+    @SerializedName("Note")
     @Expose
     public String note;
 

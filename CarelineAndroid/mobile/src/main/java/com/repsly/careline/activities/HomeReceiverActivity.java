@@ -3,6 +3,7 @@ package com.repsly.careline.activities;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +13,20 @@ import android.widget.Toast;
 import com.repsly.careline.AlarmReceiver;
 import com.repsly.careline.CarelineApplication;
 import com.repsly.careline.R;
+import com.repsly.careline.database.DbHelper;
 import com.repsly.careline.helpers.AlarmHelper;
+import com.repsly.careline.helpers.Constants;
+import com.repsly.careline.helpers.DateTimeUtil;
 import com.repsly.careline.helpers.gps.LocationHelper;
+import com.repsly.careline.model.CareReceiver;
+import com.repsly.careline.model.Medicine;
+import com.repsly.careline.model.Schedule;
+import com.repsly.careline.retrofit.ApiCarelineImpl;
+import com.tumblr.remember.Remember;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +58,55 @@ public class HomeReceiverActivity extends CarelineActivity {
 
     @Override
     public void main() {
+        //TODO check if already downloaded this!
+        new Async().execute();
+    }
 
+    private class Async extends AsyncTask<Void, Void, List<Schedule>> {
+
+        @Override
+        protected void onPostExecute(List<Schedule> list) {
+            super.onPostExecute(list);
+            DbHelper dbHelper = CarelineApplication.getDbHandler();
+            dbHelper.saveSchedules(list);
+            for (int i = 0; i < list.size(); i++) {
+                //TODO save it to the db!
+                Schedule schedule = list.get(0);
+                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                intent.putExtra("title", schedule.note);
+                PendingIntent pi = PendingIntent
+                        .getBroadcast(getApplicationContext(), i, intent, 0);
+                Date d = DateTimeUtil.fromISODate(schedule.dateTime);
+                AlarmHelper.setOneTimeAlarmOnDate(getApplication(), pi, d);
+            }
+            new AsyncMedicine().execute();
+        }
+
+        @Override
+        protected List<Schedule> doInBackground(Void... params) {
+            ApiCarelineImpl service = new ApiCarelineImpl().buildInterceptor()
+                                                           .addAuthHeader(Remember.getString(
+                                                                   Constants.LOGIN_DATA, ""));
+            return service.getSchedules();
+        }
+    }
+
+    private class AsyncMedicine extends AsyncTask<Void, Void, List<Medicine>> {
+
+        @Override
+        protected void onPostExecute(List<Medicine> medicines) {
+            super.onPostExecute(medicines);
+            DbHelper dbHelper = CarelineApplication.getDbHandler();
+            dbHelper.saveMedicines(medicines);
+        }
+
+        @Override
+        protected List<Medicine> doInBackground(Void... voids) {
+            ApiCarelineImpl service = new ApiCarelineImpl().buildInterceptor()
+                                                           .addAuthHeader(Remember.getString(
+                                                                   Constants.LOGIN_DATA, ""));
+            return service.getMedicine();
+        }
     }
 
     @OnClick(R.id.ibHelpCenter)
@@ -62,7 +120,8 @@ public class HomeReceiverActivity extends CarelineActivity {
     void onBtnAlarmClick() {
         Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
         i.putExtra("v1", true);
-        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 1, i, 0); //TODO REQUEST CODE IS KEY HERE!
+        PendingIntent pi = PendingIntent
+                .getBroadcast(getApplicationContext(), 1, i, 0); //TODO REQUEST CODE IS KEY HERE!
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);
@@ -74,7 +133,8 @@ public class HomeReceiverActivity extends CarelineActivity {
     void onBtnAlarmClickV2() {
         Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
         i.putExtra("v2", true);
-        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 2, i, 0); //TODO REQUEST CODE IS KEY HERE!
+        PendingIntent pi = PendingIntent
+                .getBroadcast(getApplicationContext(), 2, i, 0); //TODO REQUEST CODE IS KEY HERE!
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);

@@ -7,16 +7,18 @@ import com.google.gson.annotations.SerializedName;
  * Created by tosulc on 31.05.2016..
  */
 public class ScheduleItem {
-    @SerializedName("rowId")
+    @SerializedName("ScheduleItemRowId")
     @Expose
-    public String rowId;
-    @SerializedName("medicineId")
+    public String id;
+    @SerializedName("MedicineID")
     @Expose
     public String medicineId;
-    @SerializedName("name")
+    @SerializedName("ItemName")
     @Expose
     public String name;
-    @SerializedName("quantity")
+    @SerializedName("Quantity")
     @Expose
     public int quantity;
+
+    public String scheduleId;
 }

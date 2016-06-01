@@ -4,6 +4,8 @@ import android.util.Base64;
 
 import com.repsly.careline.interfaces.ILogin;
 import com.repsly.careline.model.CareReceiver;
+import com.repsly.careline.model.Medicine;
+import com.repsly.careline.model.Schedule;
 import com.repsly.careline.model.User;
 import com.repsly.careline.model.network.ServerStatus;
 import com.repsly.careline.model.network.UserData;
@@ -100,6 +102,38 @@ public class ApiCarelineImpl {
                 .build();
         ApiCarelineInterface apiCarelineService = retrofit.create(ApiCarelineInterface.class);
         Call<List<CareReceiver>> receivers = apiCarelineService.getReceiverList();
+        try {
+            return receivers.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Schedule> getSchedules() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
+        ApiCarelineInterface apiCarelineService = retrofit.create(ApiCarelineInterface.class);
+        Call<List<Schedule>> receivers = apiCarelineService.getScheduleForMobileUser();
+        try {
+            return receivers.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Medicine> getMedicine() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
+        ApiCarelineInterface apiCarelineService = retrofit.create(ApiCarelineInterface.class);
+        Call<List<Medicine>> receivers = apiCarelineService.getMedicine();
         try {
             return receivers.execute().body();
         } catch (IOException e) {
