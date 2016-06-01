@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +59,7 @@ public class ReminderActivity extends Activity {
 
             TextView tvNameOfMedicine = (TextView) llReminderItem
                     .findViewById(R.id.tv_name_of_medicine);
-            Button btnSwallow = (Button) llReminderItem.findViewById(R.id.btn_swallow);
+            ImageButton btnSwallow = (ImageButton) llReminderItem.findViewById(R.id.btn_swallow);
             tvNameOfMedicine.setText(rsi.name);
             btnSwallow.setOnClickListener(new View.OnClickListener() {
                 @Override
