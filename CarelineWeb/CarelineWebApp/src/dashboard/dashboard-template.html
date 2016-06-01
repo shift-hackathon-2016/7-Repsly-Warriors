@@ -1,0 +1,65 @@
+﻿<div ng-controller="DashboardController">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card-box">
+                <h4 class="text-dark  header-title m-t-0">Last 24 hours</h4>
+                <p class="text-muted m-b-25 font-13">
+                    Get insight into medications taken in the last 24 hours
+                </p>
+
+                <div class="table-responsive">
+                    <table class="table feed">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Care receiver</th>
+                                <th>Medication</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="therapy in therapies">
+                                <td><img src="assets/images/users/{{therapy.ReceiverAvatar}}" class="img-responsive img-circle" alt="user" width="30"></td>
+                                <td>{{therapy.ReceiverName}}</td>
+                                <td>{{therapy.MedName}}</td>
+                                <td>6 hours ago</td>
+                                <td><span class="label label-danger">{{therapy.Status}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                    <ui-gmap-markers fit="true" idkey="markers.id" models="markers" coords="'coords'" click="onMarkerClicked">
+                    </ui-gmap-markers>
+                </ui-gmap-google-map>
+            </div>
+            <div class="card-box widget-user" ng-repeat="receiver in receivers">
+                <div>
+                    <a data-toggle="modal" data-target="#tabs-modal"><img src="assets/images/users/{{receiver.Avatar}}" class="img-responsive img-circle" alt="user"></a>
+                    <div class="wid-u-info">
+                        <h4 class="m-t-0 m-b-5"><a href="receiver/{{receiver.UserID}}">{{receiver.Name}}</a></h4>
+                        <p class="text-muted m-b-5 font-13">last movement <span id="last-movement" data-time="{{receiver.LasMovementDateTime}}"></span></p>
+                        <small class="text"><b>at home</b></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src='src/assets/moment/moment.js'></script>
+<script>
+    $(function () {
+        $('.last-movement').each(function (i, val) {
+            var lastMovement = $(this).data('time');
+            var ago = moment(lastMovement).fromNow();
+            $(this).text(ago);
+        })
+    })
+</script>

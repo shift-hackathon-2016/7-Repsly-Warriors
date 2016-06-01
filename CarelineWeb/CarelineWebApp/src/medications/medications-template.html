@@ -1,0 +1,153 @@
+﻿<div ng-controller="MedicationsController">
+
+    <link href="src/assets/plugins/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="page-title">Medications</h4>
+        </div>
+        <div class="col-sm-3 text-right">
+            <button class="btn btn-primary btn-custom waves-effect w-md waves-light m-b-5" data-toggle="modal" data-target="#con-close-modal">Add new medication</button>
+        </div>
+    </div>
+    <!-- Page-Title -->
+
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <div class="card-box table-responsive">
+                <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="10">Color</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th width="10">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="medication in medications.List">
+                            <td style="background-color:{{medication.MedColor}}"></td>
+                            <td><strong>{{medication.Name}}</strong></td>
+                            <td>{{medication.MedType}}</td>
+                            <td>{{medication.Description}}</td>
+                            <td>{{medication.Quantity}}</td>
+                            <td class="actions text-center">
+                                <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> &nbsp;
+                                <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+    <form id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Add New Medication</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Name" class="control-label">Name</label>
+                                <input type="text" class="form-control" ng-model="Name" id="Name" name="Name" placeholder="Medicine name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Type" class="control-label">Type</label>
+                                <select id="Type" ng-model="MedType" name="Type" class="form-control select2">
+                                    <option value="Pill">Pill</option>
+                                    <option value="Drop">Drop</option>
+                                    <option value="Tablet">Tablet</option>
+                                    <option value="Injection">Injection</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="MedColor" class="control-label">Color</label>
+                                <div id="color-picker" class="input-group colorpicker-component">
+                                    <input type="text" ng-model="MedColor" id="MedColor" name="MedColor" class="form-control">
+                                    <span class="input-group-btn add-on">
+                                        <button class="btn btn-white" type="button">
+                                            <i style="background-color: rgb(124, 66, 84);margin-top: 2px;"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Quantity" class="control-label">Quantity in Stock</label>
+                                <input type="text" class="form-control" ng-model="Quantity" id="Quantity" name="Quantity" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="Description" class="control-label">Medication Description</label>
+                                <textarea class="form-control autogrow" ng-model="Description" id="Description" name="Description" placeholder="For what is this medication for" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="MedImg">Medication image</label>
+                                <input type="file" ng-model="MedImg" id="MedImg" name="MedImg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-custom waves-effect w-md waves-light m-b-5" ng-click="addMedication()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </form><!-- /.modal -->
+
+
+
+    <script src="src/assets/plugins/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+    <script type="text/javascript">
+            $(function() {
+                $('#color-picker').colorpicker({
+                    format: 'hex',
+                    color: '#AA3399'
+                });
+
+                $('#MedColor').on('change', function () {
+                    alert($(this).val());
+                })
+                $('#color-picker').colorpicker().trigger('changeColor');
+
+                var cp = $('#color-picker').data().colorpicker;
+                cp.color.setColor('#000000');
+                console.log(cp);
+                //cp.setColor('#AA3399');
+
+                //$('#color-picker').colorpicker().on('show', function (ev) {
+                //    //bodyStyle.backgroundColor = ev.color.toHex();
+                //    ev.color.setColor('#000000');
+                //    console.log(ev);
+                //});
+
+
+            });
+    </script>
+</div>
