@@ -40,10 +40,12 @@ carelineApp.service('communication', function ($http, $q, authService, localStor
         var authData = localStorageService.get('authorizationData');
 
         var config = {
-            'Authorization': 'Basic ' + authData,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            headers: {
+                'Authorization': 'Basic Ym1hc25lYzoxMmJtYXNuZWM=', // + authData,
+                'Content-Type': 'application/json'
+            }
         }
+
         var deferred = $q.defer();
         $http.get(baseUrl + url, param, config)
             .success(function (data, status, headers, config) {
