@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.repsly.careline.model.CareReceiver;
 import com.repsly.careline.model.Medicine;
 import com.repsly.careline.model.ReminderScheduleItem;
 import com.repsly.careline.model.Schedule;
@@ -33,6 +34,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "Create table ScheduleItem(id TEXT PRIMARY KEY, scheduleId TEXT, medicineRowId TEXT, medicineId TEXT, name TEXT, quantity TEXT)");
         db.execSQL("Create table Medicine(id TEXT PRIMARY KEY, name TEXT, medImg TEXT, description TEXT, medColor TEXT, medType TEXT, quantity TEXT)");
+        db.execSQL(
+                "Create table Carereicivers(id TEXT PRIMARY KEY, name Text, address TEXT, avatar TEXT, lastLocation TEXT)");
 
         //TODO insert some dummy data
         /*db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Adresa babe', '0')");
@@ -51,6 +54,44 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS ScheduleItem");
         db.execSQL("DROP TABLE IF EXISTS Medicine");
         onCreate(db);
+    }
+
+
+    public void saveCareReceiver(CareReceiver userData) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", userData.userId);
+        cv.put("name", userData.name);
+        cv.put("address", userData.address);
+        cv.put("avatar", userData.avatar);
+        cv.put("lastLocation", userData.lastMovement);
+        db.insert("Carereicivers", null, cv);
+        db.close();
+    }
+
+    public List<CareReceiver> getCareReceivers() {
+        List<CareReceiver> items=new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c;
+        boolean hadRecods;
+        User user = new User();
+        c = db
+                .query("Carereicivers", null, null, null,
+                       null, null, null, null);
+        if (c != null) {
+            while(hadRecods = c.moveToFirst()) {
+                if (hadRecods) {
+                    CareReceiver careReceiver=new CareReceiver();
+                    careReceiver.setId(c.getString(c.getColumnIndex("accountRowId")));
+                    careReceiver.setAddress(c.getString(c.getColumnIndex("address")));
+                    careReceiver.setName(c.getString(c.getColumnIndex("name")));
+                    careReceiver.setLastMovement(c.getString(c.getColumnIndex("lastLocation")));
+                    items.add(careReceiver);
+                }
+            }
+            c.close();
+        }
+        return items;
     }
 
     public void saveUser(UserData userData) {

@@ -75,6 +75,7 @@ public class HelpItemViewBinder extends CarelineDataBinder<HelpItemViewBinder.Vi
         public void fillDate(HelpCenterItem model) {
             title.setText(model.getTitle());
             description.setText(model.getDescription());
+            image.setImageResource(model.getImage());
             if (model.getType().equals(HelpCenterItemType.CALL)) {
                 view.setOnClickListener(callListener);
             }else if(model.getType().equals(HelpCenterItemType.NAVIGATION)){

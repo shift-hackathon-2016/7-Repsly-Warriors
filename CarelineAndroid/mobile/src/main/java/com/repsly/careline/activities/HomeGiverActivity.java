@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.repsly.careline.R;
+import com.repsly.careline.database.DbHelper;
 import com.repsly.careline.helpcenter.HelpCenterItem;
 import com.repsly.careline.helpers.Constants;
 import com.repsly.careline.model.CareReceiver;
@@ -29,16 +30,13 @@ import java.util.List;
 public class HomeGiverActivity extends CarelineActivity {
 
     private RecyclerView recyclerView;
-    private CarelineRecyclerAdapter<ReceiverListItem> adapter;
-
+    private CarelineRecyclerAdapter<CareReceiver> adapter;
 
     @Override
     public void reference() {
         recyclerView = (RecyclerView) findViewById(R.id.rvReceivers);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CarelineRecyclerAdapter<>(this, ViewHelper.getReceivers());
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -65,9 +63,14 @@ public class HomeGiverActivity extends CarelineActivity {
         @Override
         protected void onPostExecute(List<CareReceiver> list) {
             super.onPostExecute(list);
+            DbHelper db=new DbHelper(HomeGiverActivity.this);
             for (CareReceiver cr : list) {
+                db.saveCareReceiver(cr);
                 Log.d("Repsly debug message", "Item: " + cr.name);
             }
+            adapter = new CarelineRecyclerAdapter<>(HomeGiverActivity.this, list);
+            recyclerView.setAdapter(adapter);
+
         }
 
 

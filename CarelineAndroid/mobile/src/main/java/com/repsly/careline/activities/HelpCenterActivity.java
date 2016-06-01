@@ -2,6 +2,7 @@ package com.repsly.careline.activities;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.repsly.careline.R;
 import com.repsly.careline.utils.list.CarelineRecyclerAdapter;
@@ -38,6 +39,12 @@ public class HelpCenterActivity extends CarelineActivity {
             getSupportActionBar().setCustomView(null);
         }
         setTitle("Help center");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -15,11 +15,11 @@ public class ViewHelper {
 
     public static List<HelpCenterItem> getItemsForHelpCenter(){
         List<HelpCenterItem> items = new ArrayList<>();
-        items.add(new HelpCenterItem("Call doctor", "+385998877891", R.mipmap.ic_launcher,
+        items.add(new HelpCenterItem("Call doctor", "+385998877891", R.mipmap.icon_call,
                                      HelpCenterItemType.CALL));
-        items.add(new HelpCenterItem("Call caregiver", "+385998877891", R.mipmap.ic_launcher,HelpCenterItemType.CALL));
-        items.add(new HelpCenterItem("Navigate home", "Velebitska 78, Split", R.mipmap.ic_launcher, HelpCenterItemType.NAVIGATION));
-        items.add(new HelpCenterItem("Shout for help", "+instant chat", R.mipmap.ic_launcher, HelpCenterItemType.INTERCOM));
+        items.add(new HelpCenterItem("Call caregiver", "+385998877891", R.mipmap.icon_call,HelpCenterItemType.CALL));
+        items.add(new HelpCenterItem("Navigate home", "Velebitska 78, Split", R.mipmap.icon_pin, HelpCenterItemType.NAVIGATION));
+        items.add(new HelpCenterItem("Shout for help", "+instant chat", R.mipmap.icon_shout, HelpCenterItemType.INTERCOM));
         return  items;
     }
 
