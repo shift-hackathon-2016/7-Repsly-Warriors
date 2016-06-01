@@ -3,6 +3,7 @@ package com.repsly.careline;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.repsly.careline.helpers.Constants;
 import com.repsly.careline.helpers.DateTimeUtil;
 import com.repsly.careline.model.MedicineConfirmation;
 import com.repsly.careline.model.ReminderScheduleItem;
+import com.repsly.careline.model.TrackingEvent;
 import com.repsly.careline.retrofit.ApiCarelineImpl;
 import com.tumblr.remember.Remember;
 
@@ -50,12 +52,7 @@ public class ReminderActivity extends Activity {
             LinearLayout llReminderItem = (LinearLayout) getLayoutInflater()
                     .inflate(R.layout.reminder_item, llReminder, false);
             //TODO implement some random color chooser!
-            if (rsi.name.equals("Lupocet")) {
-                llReminderItem.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            } else {
-                llReminderItem
-                        .setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-            }
+            llReminderItem.setBackgroundColor(Color.parseColor(rsi.medColor));
 
             TextView tvNameOfMedicine = (TextView) llReminderItem
                     .findViewById(R.id.tv_name_of_medicine);
@@ -64,20 +61,23 @@ public class ReminderActivity extends Activity {
             btnSwallow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ApiCarelineImpl service = new ApiCarelineImpl().buildInterceptor()
+                                                                   .addAuthHeader(
+                                                                           Remember.getString(
+                                                                                   Constants.LOGIN_DATA,
+                                                                                   ""));
+                    service.sendMedicineConfirmation(
+                            new MedicineConfirmation(rsi.scheduleItemRowId,
+                                                     DateTimeUtil
+                                                             .toISODate(
+                                                                     new Date())));
+                    if (CarelineApplication.lastGpsLocation != null) {
+                        service.sendUserTracking(
+                                new TrackingEvent(1, DateTimeUtil.toISODate(new Date()), CarelineApplication.lastGpsLocation.getLatitude(),CarelineApplication.lastGpsLocation.getLongitude(),rsi.scheduleItemRowId));
+                    }
                     AnimationHelper.fadeOutView((LinearLayout) v.getParent(), 1.0f, 0);
                     --numberOfItems[0];
                     if (numberOfItems[0] == 0) {
-                        ApiCarelineImpl service = new ApiCarelineImpl().buildInterceptor()
-                                                                       .addAuthHeader(
-                                                                               Remember.getString(
-                                                                                       Constants.LOGIN_DATA,
-                                                                                       ""));
-                        service.sendMedicineConfirmation(
-                                new MedicineConfirmation(rsi.scheduleItemRowId,
-                                                         DateTimeUtil
-                                                                 .toISODate(
-                                                                         new Date())));
-
                         Toast.makeText(getApplicationContext(),
                                        "You did it, now we will leave from this page!",
                                        Toast.LENGTH_LONG).show();
