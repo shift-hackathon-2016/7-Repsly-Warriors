@@ -32,18 +32,6 @@ public class HomeGiverActivity extends CarelineActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new CarelineRecyclerAdapter<>(this, ViewHelper.getReceivers());
         recyclerView.setAdapter(adapter);
-
-        /*
-        MovementDetector.getInstance(this).addListener(new MotionListener() {
-
-            @Override
-            public void onMotionDetected(SensorEvent event, float acceleration) {
-
-            }
-        });
-
-        MovementDetector.getInstance(this).start();
-        */
     }
 
     @Override

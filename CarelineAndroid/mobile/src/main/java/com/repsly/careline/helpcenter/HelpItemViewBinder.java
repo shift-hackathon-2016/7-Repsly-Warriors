@@ -1,6 +1,7 @@
 package com.repsly.careline.helpcenter;
 
 import android.content.Intent;
+import android.location.Address;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.repsly.careline.R;
+import com.repsly.careline.database.DbHelper;
+import com.repsly.careline.helpers.GeocoderHelper;
 import com.repsly.careline.utils.list.AdapterItem;
 import com.repsly.careline.utils.list.CarelineDataBinder;
 import com.repsly.careline.utils.list.CarelineRecyclerAdapter;
@@ -92,10 +95,15 @@ public class HelpItemViewBinder extends CarelineDataBinder<HelpItemViewBinder.Vi
         private View.OnClickListener mapListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=43.5196138,16.4143467&mode=w");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                dataBindAdapter.getActivity().startActivity(mapIntent);
+                Address adresa=GeocoderHelper.getFromAddress(dataBindAdapter.getActivity(), new DbHelper(dataBindAdapter.getActivity()).getUser().getAddress());
+                if(adresa!=null) {
+                    Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s,%s&mode=w",
+                                                               adresa.getLatitude(),
+                                                               adresa.getLongitude()));
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    dataBindAdapter.getActivity().startActivity(mapIntent);
+                }
             }
         };
 

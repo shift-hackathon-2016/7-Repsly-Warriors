@@ -36,8 +36,8 @@ public class HomeReceiverActivity extends CarelineActivity {
     public void setUpToolbar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(false);
-            getSupportActionBar().setCustomView(null);
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            setTitle("Careline");
         }
     }
 
