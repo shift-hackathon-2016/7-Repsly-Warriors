@@ -21,7 +21,7 @@ import com.tumblr.remember.Remember;
 /**
  * Created by Alen on 31.5.2016..
  */
-public class LogInActivity extends LogInAbstract implements ILogin{
+public class LogInActivity extends LogInAbstract implements ILogin {
 
     @Override
     public void referenceItems() {
@@ -37,11 +37,10 @@ public class LogInActivity extends LogInAbstract implements ILogin{
         /*String credentials = username + ":" + password;
         final String basic =
                 "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);*/
-        Log.d("Repsly debug message", "Login data: " + Remember.getString("loginData", "nop"));
         String data = AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec");
-            ApiCarelineImpl service = new ApiCarelineImpl("http://api.carelineapp.me/")
-                    .buildInterceptor().addAuthHeader(data);
-            service.sendLoginData(this);
+        ApiCarelineImpl service = new ApiCarelineImpl("http://api.carelineapp.me/")
+                .buildInterceptor().addAuthHeader(data);
+        service.sendLoginData(this);
         /*if(validateData()) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -65,7 +64,14 @@ public class LogInActivity extends LogInAbstract implements ILogin{
             Remember.putBoolean("isManager", userData.manager);
             Remember.putString("loginData",
                                AuthHelper.encodeBase64String("bmasnec" + ":" + "12bmasnec"));
-            //TODO redirect!
+            Intent i;
+            if (userData.manager) {
+                i = new Intent(getApplicationContext(), HomeGiverActivity.class);
+            } else {
+                i = new Intent(getApplicationContext(), HomeReceiverActivity.class);
+            }
+            startActivity(i);
+            finish();
         } else {
             Toast.makeText(getApplicationContext(), "Login failed!", Toast.LENGTH_SHORT).show();
         }
