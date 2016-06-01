@@ -29,5 +29,10 @@ namespace CarelineWebAPI.Controllers
                 return 0;
             }
         }
+
+        public List<GeolocationModel> GetUserLocations()
+        {
+            return DBOperations.GetUserLocations(AccountContextHelper.GetContext().AccountId);
+        }
     }
 }

@@ -36,6 +36,35 @@ namespace CarelineWebAPI.Data
             return model;
         }
 
+        internal static List<GeolocationModel> GetUserLocations(int accountId)
+        {
+            List<GeolocationModel> modelList = new List<GeolocationModel>();
+
+            using (DBConnector connector = new DBConnector("get_UserLocation", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Execute(DBOperation.GetWhileReader);
+
+                if (connector.Rdr.HasRows)
+                {
+                    while (connector.Rdr.Read())
+                    {
+                        GeolocationModel model = new GeolocationModel();
+
+                        model.UserID = Convert.ToInt32(connector.Rdr["UserID"]);
+                        model.Name = connector.Rdr["Name"].ToString();
+                        model.Avatar = connector.Rdr["Avatar"].ToString();
+                        model.MaxDate = (DateTime)connector.Rdr["MaxDate"];
+                        model.Latitude = (float)connector.Rdr["Latitude"];
+                        model.Longitude = (float)connector.Rdr["Longitude"];
+
+                        modelList.Add(model);
+                    }
+                }
+            }
+            return modelList;
+        }
+
         internal static int SaveSchedule(ScheduleModel model, int accountId)
         {
             using (DBConnector connector = new DBConnector("save_Schedule", CommandType.StoredProcedure))

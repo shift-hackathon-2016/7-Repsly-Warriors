@@ -8633,6 +8633,7 @@
     <Compile Include="Helpers\RequestValidationHelper.cs" />
     <Compile Include="Models\AccountContext.cs" />
     <Compile Include="Models\CareReceiverModel.cs" />
+    <Compile Include="Models\GeolocationModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MedicineConfirmationModel.cs" />
     <Compile Include="Models\MedicineModel.cs" />
