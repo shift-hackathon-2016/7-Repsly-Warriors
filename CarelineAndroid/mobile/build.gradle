@@ -51,4 +51,6 @@ dependencies {
 
     //location
     compile 'com.google.android.gms:play-services-location:9.0.0'
+
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }

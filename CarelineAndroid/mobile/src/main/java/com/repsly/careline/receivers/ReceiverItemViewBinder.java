@@ -1,28 +1,27 @@
 package com.repsly.careline.receivers;
 
 import android.content.Intent;
+import android.location.Address;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.repsly.careline.R;
-import com.repsly.careline.helpcenter.HelpCenterItem;
-import com.repsly.careline.helpcenter.HelpCenterItemType;
+import com.repsly.careline.helpers.DateTimeUtil;
+import com.repsly.careline.helpers.GeocoderHelper;
+import com.repsly.careline.model.CareReceiver;
 import com.repsly.careline.utils.list.AdapterItem;
 import com.repsly.careline.utils.list.CarelineDataBinder;
 import com.repsly.careline.utils.list.CarelineRecyclerAdapter;
-import com.repsly.utils.lib.device.CallUtil;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Alen on 31.5.2016..
  */
-public class ReceiverItemViewBinder  extends CarelineDataBinder<ReceiverItemViewBinder.ViewHolder> {
+public class ReceiverItemViewBinder extends CarelineDataBinder<ReceiverItemViewBinder.ViewHolder> {
 
 
     public ReceiverItemViewBinder(
@@ -38,7 +37,7 @@ public class ReceiverItemViewBinder  extends CarelineDataBinder<ReceiverItemView
     @Override
     public void bindViewHolder(ViewHolder holder, int position) {
         holder.findViews(position);
-        holder.fillDate((ReceiverListItem) dataBindAdapter.getItem(position));
+        holder.fillDate((CareReceiver) dataBindAdapter.getItem(position));
 
     }
 
@@ -54,12 +53,13 @@ public class ReceiverItemViewBinder  extends CarelineDataBinder<ReceiverItemView
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements
-            AdapterItem<ReceiverListItem> {
+            AdapterItem<CareReceiver> {
 
         private View view;
         private TextView tvName;
         private TextView tvDescription;
         private ImageView avatar;
+        private String address;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -71,13 +71,27 @@ public class ReceiverItemViewBinder  extends CarelineDataBinder<ReceiverItemView
             tvName = (TextView) view.findViewById(R.id.tvName);
             tvDescription = (TextView) view.findViewById(R.id.tvDescription);
             avatar = (ImageView) view.findViewById(R.id.ivAvatar);
+            view.setOnClickListener(listener);
         }
 
         @Override
-        public void fillDate(ReceiverListItem model) {
+        public void fillDate(CareReceiver model) {
             tvName.setText(model.getName());
-            tvDescription.setText("last movement "+model.getLastMovement()+"min ago");
+            tvDescription.setText("Last movement: " + DateTimeUtil.getTimeAgo(DateTimeUtil.fromISODate(model.getLastMovement()),dataBindAdapter.getActivity()));
+            address=model.getAddress();
         }
+
+        private View.OnClickListener listener = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Address adr = GeocoderHelper.getFromAddress(dataBindAdapter.getActivity(), address);
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri
+                        .parse("http://maps.google.com/maps?q=loc:" + adr.getLatitude() + "," + adr.getLongitude()));
+                dataBindAdapter.getActivity().startActivity(i);
+
+            }
+        };
     }
 
 }
