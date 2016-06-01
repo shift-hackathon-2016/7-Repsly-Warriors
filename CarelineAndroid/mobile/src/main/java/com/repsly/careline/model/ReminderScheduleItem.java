@@ -11,4 +11,5 @@ public class ReminderScheduleItem {
     public String type;
     public String quantity;
     public String scheduleItemRowId;
+    public String medColor;
 }

@@ -3,6 +3,7 @@ package com.repsly.careline;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -51,12 +52,7 @@ public class ReminderActivity extends Activity {
             LinearLayout llReminderItem = (LinearLayout) getLayoutInflater()
                     .inflate(R.layout.reminder_item, llReminder, false);
             //TODO implement some random color chooser!
-            if (rsi.name.equals("Lupocet")) {
-                llReminderItem.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            } else {
-                llReminderItem
-                        .setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-            }
+            llReminderItem.setBackgroundColor(Color.parseColor(rsi.medColor));
 
             TextView tvNameOfMedicine = (TextView) llReminderItem
                     .findViewById(R.id.tv_name_of_medicine);
