@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="textInputLayout" parent="@android:style/TextAppearance">
+
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+
 </resources>
