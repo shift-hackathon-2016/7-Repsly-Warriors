@@ -40,11 +40,13 @@ public class DbHelper extends SQLiteOpenHelper {
         //TODO insert some dummy data
         /*db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Adresa babe', '0')");
         db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Velebitska 78, Split, Croatia', '0')"); */
-        /*db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
+        db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
         db.execSQL("Insert into ScheduleItem values('1','1','dfgsdfgsf','1','haha','20')");
         db.execSQL("Insert into ScheduleItem values('2','1','xcyvcxy','2','tralala','102')");
-        db.execSQL("Insert into Medicine values('1','Lupocet','','luda tableta', '','', '2')");
-        db.execSQL("Insert into Medicine values('2','Luda tableta','','Note za ludoj tableti', '','', '5')");*/
+        db.execSQL("Insert into Medicine values('1','Benadryl','','pill', '#EE5D8E','pill', '2')");
+        db.execSQL("Insert into Medicine values('2','Adderall','','pill', '#EFA867','pill', '5')");
+        db.execSQL("Insert into Medicine values('3','Meloxicam','','pill', '#8BD73E','pill', '7')");
+        db.execSQL("Insert into Medicine values('4','Tramadol','','pill', '#9B9FDA','pill', '12')");
     }
 
     @Override
@@ -177,7 +179,7 @@ public class DbHelper extends SQLiteOpenHelper {
         boolean hadRecods;
         ArrayList<ReminderScheduleItem> scheduleItems = new ArrayList<>();
         c = db.rawQuery(
-                "select s.datetime, si.id, m.name, m.medType, si.quantity from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId\n" +
+                "select s.datetime, si.id, m.name, m.medType, si.quantity, m.medColor from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId\n" +
                         "left join Medicine as m on si.medicineId = m.id", null);
         if (c != null) {
             hadRecods = c.moveToFirst();
@@ -189,6 +191,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 //rsi.note = c.getString(c.getColumnIndex("note"));
                 rsi.quantity = c.getString(c.getColumnIndex("quantity"));
                 rsi.type = c.getString(c.getColumnIndex("medType"));
+                rsi.medColor = c.getString(c.getColumnIndex("medColor"));
                 scheduleItems.add(rsi);
                 hadRecods = c.moveToNext();
             }

@@ -17,8 +17,18 @@ public class DateTimeUtil {
 
     public final static String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
     public final static String DATE_ONLY_FORMAT = "yyyy-MM-dd";
+    public final static String TIME_ONLY_FORMAT = "HH:mm";
 
     public final static String DATE_FORMAT_SHOW = "EEE, MMM d, HH:mm";
+
+
+    public static String toShowTIme(Date d) {
+        if (d == null) {
+            d = new Date(System.currentTimeMillis());
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(TIME_ONLY_FORMAT, Locale.US);
+        return sdf.format(d);
+    }
 
 
     public static String toShowDate(Date d) {
