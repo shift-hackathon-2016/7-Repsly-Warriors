@@ -19,9 +19,9 @@ public class NotificationHelper {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setSmallIcon(android.R.drawable.stat_notify_sync).setTicker(tickerText)
                 .setContentTitle(contentTitle).setContentText(contentText);
-        Uri sound = Uri
+        /*Uri sound = Uri
                 .parse("android.resource://" + context.getPackageName() + "/raw/bbc_birds");
-        builder.setSound(sound);
+        builder.setSound(sound);*/
         Notification notification = build(builder);
         notification.defaults |= Notification.DEFAULT_VIBRATE;
         //notification.defaults |= Notification.DEFAULT_SOUND;

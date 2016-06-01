@@ -61,11 +61,24 @@ public class HomeReceiverActivity extends CarelineActivity {
     @OnClick(R.id.btnAlarm)
     void onBtnAlarmClick() {
         Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+        i.putExtra("v1", true);
+        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 1, i, 0); //TODO REQUEST CODE IS KEY HERE!
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);
-        cal.add(Calendar.MILLISECOND, 3000);
+        cal.add(Calendar.MILLISECOND, 5000);
+        AlarmHelper.setOneTimeAlarmOnDate(getApplication(), pi, cal.getTime());
+    }
+
+    @OnClick(R.id.btnAlarmV2)
+    void onBtnAlarmClickV2() {
+        Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+        i.putExtra("v2", true);
+        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 2, i, 0); //TODO REQUEST CODE IS KEY HERE!
+        Date d = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        cal.add(Calendar.MILLISECOND, 7000);
         AlarmHelper.setOneTimeAlarmOnDate(getApplication(), pi, cal.getTime());
     }
 
