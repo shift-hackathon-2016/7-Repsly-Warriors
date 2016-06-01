@@ -136,7 +136,7 @@ public class DbHelper extends SQLiteOpenHelper {
         boolean hadRecods;
         ArrayList<ReminderScheduleItem> scheduleItems = new ArrayList<>();
         c = db.rawQuery(
-                "select s.datetime, si.medicineRowId, m.name, m.medType, si.quantity from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId\n" +
+                "select s.datetime, si.id, m.name, m.medType, si.quantity from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId\n" +
                         "left join Medicine as m on si.medicineId = m.id", null);
         if (c != null) {
             hadRecods = c.moveToFirst();
@@ -144,7 +144,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 ReminderScheduleItem rsi = new ReminderScheduleItem();
                 rsi.name = c.getString(c.getColumnIndex("name"));
                 rsi.dateTime = c.getString(c.getColumnIndex("dateTime"));
-                rsi.medicineRowId = c.getString(c.getColumnIndex("medicineRowId"));
+                rsi.scheduleItemRowId = c.getString(c.getColumnIndex("id"));
                 //rsi.note = c.getString(c.getColumnIndex("note"));
                 rsi.quantity = c.getString(c.getColumnIndex("quantity"));
                 rsi.type = c.getString(c.getColumnIndex("medType"));

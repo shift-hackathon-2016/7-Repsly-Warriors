@@ -71,10 +71,11 @@ public class ReminderActivity extends Activity {
                                                                                Remember.getString(
                                                                                        Constants.LOGIN_DATA,
                                                                                        ""));
-                        service.sendMedicineConfirmation(new MedicineConfirmation(rsi.medicineRowId,
-                                                                                  DateTimeUtil
-                                                                                          .toISODate(
-                                                                                                  new Date())));
+                        service.sendMedicineConfirmation(
+                                new MedicineConfirmation(rsi.scheduleItemRowId,
+                                                         DateTimeUtil
+                                                                 .toISODate(
+                                                                         new Date())));
 
                         Toast.makeText(getApplicationContext(),
                                        "You did it, now we will leave from this page!",
