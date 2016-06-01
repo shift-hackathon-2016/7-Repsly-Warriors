@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.ajax
+  ({
+      type: "GET",
+      url: "http://localhost:52885/api/CareReceiver/GetList",
+      dataType: 'json',
+      async: false,
+      success: function () {
+          alert('Thanks for your comment!');
+      },
+      beforeSend: function (xhr) {
+          xhr.setRequestHeader("Authorization", "Basic Ym1hc25lYzoxMmJtYXNuZWM=");
+      }
+  });
+    });
+});
+    </script>
+</head>
+<body>
+
+    <button>Send an HTTP GET request to a page and get the result back</button>
+
+</body>
+</html>

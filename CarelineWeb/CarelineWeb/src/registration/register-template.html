@@ -1,0 +1,58 @@
+﻿<style>
+    .wrapper { margin-top: 0; }
+</style>
+<div ng-controller="RegisterController">
+
+    <div class="wrapper-page">
+        <div class="text-center">
+            <a href="index.html" class="logo logo-lg"><i class="md md-equalizer"></i> <span>Careline</span> </a>
+        </div>
+
+        <form class="form-horizontal m-t-20">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input class="form-control" ng-model="Email" type="email" required="" placeholder="Email">
+                    <i class="md md-email form-control-feedback l-h-34"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input class="form-control" ng-model="Password" type="password" required="" placeholder="Password">
+                    <i class="md md-account-circle form-control-feedback l-h-34"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input class="form-control" ng-model="PasswordRepeat" type="password" required="" placeholder="Repeat password">
+                    <i class="md md-vpn-key form-control-feedback l-h-34"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <div class="checkbox checkbox-primary">
+                        <input id="checkbox-signup" type="checkbox" checked="checked">
+                        <label for="checkbox-signup">
+                            I accept <a href="#">Terms and Conditions</a>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group text-right m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-custom waves-effect waves-light w-md" type="submit" ng-click="signUp()">Register</button>
+                </div>
+            </div>
+
+            <div class="form-group m-t-30">
+                <div class="col-sm-12 text-center">
+                    <a href="login" class="text-muted">Already have account?</a>
+                </div>
+            </div>
+        </form>        
+    </div>
+</div>

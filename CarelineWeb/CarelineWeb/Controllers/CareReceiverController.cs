@@ -12,7 +12,7 @@ using System.Web.Http.Cors;
 
 namespace CarelineWebAPI.Controllers
 {
-    [EnableCors(origins: "localhost", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:60319", headers: "Authorization", methods: "*")]
     [MyBasicAuthenticationFilter]
     public class CareReceiverController : ApiController
     {

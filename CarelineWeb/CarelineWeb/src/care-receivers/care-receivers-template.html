@@ -1,0 +1,104 @@
+﻿<div ng-controller="CareReceiversController">
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="page-title">Care receivers</h4>
+        </div>
+        <div class="col-sm-3 text-right">
+            <button class="btn btn-primary btn-custom waves-effect w-md waves-light m-b-5" data-toggle="modal" data-target="#con-close-modal">Add new receiver</button>
+        </div>
+    </div>
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="care-receivers" ng-repeat="receiver in receivers.List">
+            <div class="col-sm-6 col-lg-4">
+                <div class="card-box widget-user">
+                    <div>
+                        <a data-toggle="modal" data-target="#tabs-modal"><img src="assets/images/users/{{receiver.Avatar}}" class="img-responsive img-circle" alt="user"></a>
+                        <div class="wid-u-info">
+                            <h4 class="m-t-0 m-b-5"><a href="receiver/{{receiver.IDUser}}">{{receiver.Name}}</a></h4>
+                            <p class="text-muted m-b-5 font-13">last movement <span id="last-movement" data-time="{{receiver.LasMovementDateTime}}"></span></p>
+                            <small class="text"><b>at home</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Add New Receiver</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Name" class="control-label">Name</label>
+                                <input type="text" class="form-control" ng-model="Name" id="Name" name="Name" placeholder="John">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Email" class="control-label">Email</label>
+                                <input type="text" class="form-control" ng-model="Email" id="Email" name="Email" placeholder="Doe">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Address" class="control-label">Address</label>
+                                <input type="text" class="form-control" ng-model="Address" id="Address" name="Address" placeholder="Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Username" class="control-label">Username</label>
+                                <input type="text" class="form-control" ng-model="Username" id="Username" name="Username" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Password" class="control-label">Password</label>
+                                <input type="text" class="form-control" ng-model="Password" id="Password" name="Password" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="Note" class="control-label">Personal Info</label>
+                                <textarea class="form-control autogrow" ng-model="Note" id="Note" name="Note" placeholder="Write something about care receiver" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="Avatar">Upload avatar</label>
+                                <input type="file" ng-model="Avatar" id="Avatar" name="Avatar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-custom waves-effect w-md waves-light m-b-5" ng-click="addCareReceiver()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </form><!-- /.modal -->
+</div>
+<script src='src/assets/moment/moment.js'></script>
+<script>
+    $(function () {
+        var lastMovement = $('#last-movement').data('time'); 
+        var ago = moment(lastMovement).fromNow();
+        $('#last-movement').text(ago);
+    })
+</script>
