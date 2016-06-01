@@ -8,6 +8,7 @@ import com.repsly.careline.model.CareReceiver;
 import com.repsly.careline.model.Medicine;
 import com.repsly.careline.model.MedicineConfirmation;
 import com.repsly.careline.model.Schedule;
+import com.repsly.careline.model.TrackingEvent;
 import com.repsly.careline.model.User;
 import com.repsly.careline.model.network.ServerStatus;
 import com.repsly.careline.model.network.UserData;
@@ -163,29 +164,26 @@ public class ApiCarelineImpl {
                 Log.d("Repsly debug message", "FAILED!");
             }
         });
-
     }
 
-    /**
-     * TODO call it from async!
-     *
-     * @return user data
-     */
-    public User getUserData() {
+    public void sendUserTracking(TrackingEvent te) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client.build())
                 .build();
         ApiCarelineInterface apiCarelineService = retrofit.create(ApiCarelineInterface.class);
-        Call<User> userCall = apiCarelineService.getUserData("iddd"); //TODO id of user!
-        User user = null;
-        try {
-            user = userCall.execute().body();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
+        Call<Void> service = apiCarelineService.sendTrackingEvent(te);
+        service.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                Log.d("Repsly debug message", "SENT!");
+            }
 
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("Repsly debug message", "FAILED!");
+            }
+        });
+    }
 }

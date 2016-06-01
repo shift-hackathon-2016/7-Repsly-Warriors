@@ -4,6 +4,7 @@ import com.repsly.careline.model.CareReceiver;
 import com.repsly.careline.model.Medicine;
 import com.repsly.careline.model.MedicineConfirmation;
 import com.repsly.careline.model.Schedule;
+import com.repsly.careline.model.TrackingEvent;
 import com.repsly.careline.model.User;
 import com.repsly.careline.model.network.ServerStatus;
 import com.repsly.careline.model.network.UserData;
@@ -37,9 +38,7 @@ public interface ApiCarelineInterface  {
     @POST("/api/Schedule/MedicineConfirmation")
     Call<Void> sendMedicineConformation(@Body MedicineConfirmation mc);
 
-    @GET
-    Call<User> getUserData(@Path("userId") String userId);
+    @POST("/api/Events/NewTrackingEvent")
+    Call<Void> sendTrackingEvent(@Body TrackingEvent te);
 
-    @POST()
-    Call<Void> sendCurrentLocation(); //TODO implement
 }

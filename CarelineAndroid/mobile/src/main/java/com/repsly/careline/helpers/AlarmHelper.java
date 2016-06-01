@@ -48,7 +48,7 @@ public class AlarmHelper {
         am.cancel(pi); //we stop the previous alarms so there won't be any alarms working in parallel
         //TODO do not hardcode this! For now, every minute, send!
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000,
-                        60000, pi);
+                        30 * 60000, pi);
         Intent service = new Intent(c, MovementService.class);
         c.startService(service);
     }

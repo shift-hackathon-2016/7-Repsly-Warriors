@@ -18,6 +18,7 @@ import com.repsly.careline.helpers.Constants;
 import com.repsly.careline.helpers.DateTimeUtil;
 import com.repsly.careline.model.MedicineConfirmation;
 import com.repsly.careline.model.ReminderScheduleItem;
+import com.repsly.careline.model.TrackingEvent;
 import com.repsly.careline.retrofit.ApiCarelineImpl;
 import com.tumblr.remember.Remember;
 
@@ -64,20 +65,23 @@ public class ReminderActivity extends Activity {
             btnSwallow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ApiCarelineImpl service = new ApiCarelineImpl().buildInterceptor()
+                                                                   .addAuthHeader(
+                                                                           Remember.getString(
+                                                                                   Constants.LOGIN_DATA,
+                                                                                   ""));
+                    service.sendMedicineConfirmation(
+                            new MedicineConfirmation(rsi.scheduleItemRowId,
+                                                     DateTimeUtil
+                                                             .toISODate(
+                                                                     new Date())));
+                    if (CarelineApplication.lastGpsLocation != null) {
+                        service.sendUserTracking(
+                                new TrackingEvent(1, DateTimeUtil.toISODate(new Date()), CarelineApplication.lastGpsLocation.getLatitude(),CarelineApplication.lastGpsLocation.getLongitude(),rsi.scheduleItemRowId));
+                    }
                     AnimationHelper.fadeOutView((LinearLayout) v.getParent(), 1.0f, 0);
                     --numberOfItems[0];
                     if (numberOfItems[0] == 0) {
-                        ApiCarelineImpl service = new ApiCarelineImpl().buildInterceptor()
-                                                                       .addAuthHeader(
-                                                                               Remember.getString(
-                                                                                       Constants.LOGIN_DATA,
-                                                                                       ""));
-                        service.sendMedicineConfirmation(
-                                new MedicineConfirmation(rsi.scheduleItemRowId,
-                                                         DateTimeUtil
-                                                                 .toISODate(
-                                                                         new Date())));
-
                         Toast.makeText(getApplicationContext(),
                                        "You did it, now we will leave from this page!",
                                        Toast.LENGTH_LONG).show();

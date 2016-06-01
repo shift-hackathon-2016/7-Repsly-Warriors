@@ -40,11 +40,11 @@ public class DbHelper extends SQLiteOpenHelper {
         //TODO insert some dummy data
         /*db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Adresa babe', '0')");
         db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Velebitska 78, Split, Croatia', '0')"); */
-        /*db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
+        db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
         db.execSQL("Insert into ScheduleItem values('1','1','dfgsdfgsf','1','haha','20')");
         db.execSQL("Insert into ScheduleItem values('2','1','xcyvcxy','2','tralala','102')");
         db.execSQL("Insert into Medicine values('1','Lupocet','','luda tableta', '','', '2')");
-        db.execSQL("Insert into Medicine values('2','Luda tableta','','Note za ludoj tableti', '','', '5')");*/
+        db.execSQL("Insert into Medicine values('2','Luda tableta','','Note za ludoj tableti', '','', '5')");
     }
 
     @Override
