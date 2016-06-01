@@ -54,3 +54,6 @@ C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\obj\Debug\Careline
 C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\obj\Debug\CarelineWebAPI.pdb
 C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\DBLayer.dll
 C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\DBLayer.pdb
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\System.Web.Cors.dll
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\System.Web.Http.Cors.dll
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\CarelineWeb\bin\System.Web.Http.Cors.xml

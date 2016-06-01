@@ -8,9 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CarelineWebAPI.Controllers
 {
+    [EnableCors(origins: "localhost", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         [MyBasicAuthenticationFilter]
