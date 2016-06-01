@@ -22,7 +22,7 @@ import com.tumblr.remember.Remember;
 /**
  * Created by Alen on 31.5.2016..
  */
-public class LogInActivity extends LogInAbstract implements ILogin {
+public class LogInActivity extends CereLogInAbstract implements ILogin {
 
     @Override
     public void referenceItems() {
