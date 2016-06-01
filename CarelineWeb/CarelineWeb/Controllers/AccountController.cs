@@ -34,7 +34,7 @@ namespace CarelineWebAPI.Controllers
             }
         }
 
-        public UserModel Login([FromBody] LoginModel model)
+        public UserModel SignIn(LoginModel model)
         {
             return DBOperations.GetUserByUsernamePassword(model.username, model.password);
         }

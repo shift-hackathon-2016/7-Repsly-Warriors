@@ -6,19 +6,15 @@
     };
 
     receivers.getReceiverById = function (id) {
-        return communication.ajaxGet('receiver/' + id);
+        return communication.ajaxGet('CareReceiver/GetCareReceiver/' + id);
     };
 
     receivers.getScheduleById = function (id) {
-        return communication.ajaxGet('schedule/' + id);
+        return communication.ajaxGet('Schedule/GetSchedule/' + id);
     };
 
     receivers.getTherapyById = function (id) {
-        return communication.ajaxGet('CareReceiver/TherapyCard' + id);
-    };
-
-    receivers.getScheduleById = function () {
-        return communication.ajaxGet('schedule/' + id);
+        return communication.ajaxGet('CareReceiver/TherapyCard/' + id);
     };
 
     receivers.addCareReceiver = function (scope) {

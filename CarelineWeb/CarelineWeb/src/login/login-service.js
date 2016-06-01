@@ -7,12 +7,12 @@
             params.password = scope.Password;
 
             var loginSuccess = function () {
-                var encodedAuth = btoa(params.Username + ':' + params.Password);
+                var encodedAuth = btoa(params.username + ':' + params.password);
                 localStorageService.set('authorizationData', encodedAuth);
-                window.location = communication.baseUrl + '/';
+                window.location.pathname = '/';
             }
 
-            var promise = communication.ajaxPost('Account/Login', params, loginSuccess);
+            var promise = communication.ajaxPost('Account/SignIn', params, loginSuccess);
 
     }
 

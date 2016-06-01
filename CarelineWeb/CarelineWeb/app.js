@@ -54,10 +54,10 @@ carelineApp.config(function ($routeProvider, $locationProvider, uiGmapGoogleMapA
 carelineApp.run(['authService', function (authService) {
     authService.fillAuthData();
 
-    var baseUrl = 'http://localhost:60319/';
-    if (!authService.authentication.isAuth && window.location.pathname != '/login' && window.location.pathname != '/register') {
-        window.location = baseUrl + 'login';
-    } else if (authService.authentication.isAuth && (window.location.pathname == '/login' || window.location.pathname == '/register')) {
-        window.location = baseUrl + '/';
-    }
+    //var baseUrl = 'http://localhost:52885/';
+    //if (!authService.authentication.isAuth && window.location.pathname != '/login' && window.location.pathname != '/register') {
+    //    window.location = baseUrl + 'login';
+    //} else if (authService.authentication.isAuth && (window.location.pathname == '/login' || window.location.pathname == '/register')) {
+    //    window.location = baseUrl + '/';
+    //}
 }]);
