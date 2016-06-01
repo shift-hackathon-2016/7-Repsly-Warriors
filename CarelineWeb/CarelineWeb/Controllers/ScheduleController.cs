@@ -50,5 +50,10 @@ namespace CarelineWebAPI.Controllers
             }
         }
 
+        public List<ScheduleHistory> GetScheduleHistory()
+        {
+            return DBOperations.GetScheduleHistory(AccountContextHelper.GetContext().AccountId);
+        }
+
     }
 }
