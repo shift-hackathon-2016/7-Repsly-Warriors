@@ -7,15 +7,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.repsly.careline.database.DbHelper;
 import com.repsly.careline.helpers.AnimationHelper;
+import com.repsly.careline.helpers.Constants;
+import com.repsly.careline.helpers.DateTimeUtil;
+import com.repsly.careline.model.MedicineConfirmation;
 import com.repsly.careline.model.ReminderScheduleItem;
+import com.repsly.careline.retrofit.ApiCarelineImpl;
+import com.tumblr.remember.Remember;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,17 +46,20 @@ public class ReminderActivity extends Activity {
 
         llReminder.removeAllViews();
         final int[] numberOfItems = {list.size()};
-        for (ReminderScheduleItem rsi : list) {
-            LinearLayout llReminderItem = (LinearLayout) getLayoutInflater().inflate(R.layout.reminder_item, llReminder, false);
+        for (final ReminderScheduleItem rsi : list) {
+            LinearLayout llReminderItem = (LinearLayout) getLayoutInflater()
+                    .inflate(R.layout.reminder_item, llReminder, false);
             //TODO implement some random color chooser!
             if (rsi.name.equals("Lupocet")) {
                 llReminderItem.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             } else {
-                llReminderItem.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                llReminderItem
+                        .setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
             }
 
-            TextView tvNameOfMedicine = (TextView) llReminderItem.findViewById(R.id.tv_name_of_medicine);
-            Button btnSwallow = (Button) llReminderItem.findViewById(R.id.btn_swallow);
+            TextView tvNameOfMedicine = (TextView) llReminderItem
+                    .findViewById(R.id.tv_name_of_medicine);
+            ImageButton btnSwallow = (ImageButton) llReminderItem.findViewById(R.id.btn_swallow);
             tvNameOfMedicine.setText(rsi.name);
             btnSwallow.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,8 +67,20 @@ public class ReminderActivity extends Activity {
                     AnimationHelper.fadeOutView((LinearLayout) v.getParent(), 1.0f, 0);
                     --numberOfItems[0];
                     if (numberOfItems[0] == 0) {
-                        //TODO send data to the server!
-                        Toast.makeText(getApplicationContext(), "You did it, now we will leave from this page!", Toast.LENGTH_LONG).show();
+                        ApiCarelineImpl service = new ApiCarelineImpl().buildInterceptor()
+                                                                       .addAuthHeader(
+                                                                               Remember.getString(
+                                                                                       Constants.LOGIN_DATA,
+                                                                                       ""));
+                        service.sendMedicineConfirmation(
+                                new MedicineConfirmation(rsi.scheduleItemRowId,
+                                                         DateTimeUtil
+                                                                 .toISODate(
+                                                                         new Date())));
+
+                        Toast.makeText(getApplicationContext(),
+                                       "You did it, now we will leave from this page!",
+                                       Toast.LENGTH_LONG).show();
                         NotificationManager nm = (NotificationManager) getApplicationContext()
                                 .getSystemService(Context.NOTIFICATION_SERVICE);
                         nm.cancel(1);

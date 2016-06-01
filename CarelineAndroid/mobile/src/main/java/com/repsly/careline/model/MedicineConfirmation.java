@@ -5,7 +5,11 @@ package com.repsly.careline.model;
  */
 public class MedicineConfirmation {
 
-    public String scheduleRowId;
-    public String dateTime;
+    public String ScheduleItemRowid;
+    public String ConfirmationDateTime;
 
+    public MedicineConfirmation(String scheduleItemRowId, String dateTime) {
+        this.ScheduleItemRowid = scheduleItemRowId;
+        this.ConfirmationDateTime = dateTime;
+    }
 }
