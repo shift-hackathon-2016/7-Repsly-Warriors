@@ -4818,6 +4818,7 @@
     <Content Include="src\assets\google-maps-utility-library-v3-markerwithlabel\examples\home.png" />
     <Content Include="src\assets\images\avatar-1.jpg" />
     <Content Include="src\assets\images\favicon_1.ico" />
+    <Content Include="src\assets\images\logo.png" />
     <Content Include="src\assets\images\multiple-arrow.png" />
     <Content Include="src\assets\images\users\avatar-1.jpg" />
     <Content Include="src\assets\images\users\avatar-10.jpg" />
@@ -4829,6 +4830,7 @@
     <Content Include="src\assets\images\users\avatar-7.jpg" />
     <Content Include="src\assets\images\users\avatar-8.jpg" />
     <Content Include="src\assets\images\users\avatar-9.jpg" />
+    <Content Include="src\assets\images\users\varat_signedin.jpg" />
     <Content Include="src\assets\jquery\AUTHORS.txt" />
     <Content Include="src\assets\jquery\dist\jquery.js" />
     <Content Include="src\assets\jquery\dist\jquery.min.js" />

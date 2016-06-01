@@ -41,7 +41,7 @@ carelineApp.service('communication', function ($http, $q, authService, localStor
 
         var config = {
             headers: {
-                'Authorization': 'Basic Ym1hc25lYzoxMmJtYXNuZWM=', // + authData,
+                'Authorization': 'Basic ' + authData,
                 'Content-Type': 'application/json'
             }
         }

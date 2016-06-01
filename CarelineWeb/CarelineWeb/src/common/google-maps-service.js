@@ -3,24 +3,24 @@
 
 
     function getLocations() {
-        return communication.ajaxGet('locations');
+        return communication.ajaxGet('Event/GetUserLocations');
     }
 
     function getLocationsById(id) {
-        return communication.ajaxGet('locations/' + id);
+        return communication.ajaxGet('Event/GetUserLocations/' + id);
     }
 
     googleMaps.getMarkers = function () {
         var locations = getLocations();
         var markers = [];
-        var markersCount = locations.Tracking.length;
+        var markersCount = locations.length;
         for (var i = 0; i < markersCount; i++) {
             markers.push(
                 {
                     id: i,
                     coords: {
-                        latitude: locations.Tracking[i].Latitude,
-                        longitude: locations.Tracking[i].Longitude
+                        latitude: locations[i].Latitude,
+                        longitude: locations[i].Longitude
                     }
                 });
 
@@ -30,14 +30,14 @@
     googleMaps.getMarkersById = function (id) {
         var locations = getLocationsById(id);
         var markers = [];
-        var markersCount = locations.Tracking.length;
+        var markersCount = locations.length;
         for (var i = 0; i < markersCount; i++) {
             markers.push(
                 {
                     id: i,
                     coords: {
-                        latitude: locations.Tracking[i].Latitude,
-                        longitude: locations.Tracking[i].Longitude
+                        latitude: locations[i].Latitude,
+                        longitude: locations[i].Longitude
                     }
                 });
 

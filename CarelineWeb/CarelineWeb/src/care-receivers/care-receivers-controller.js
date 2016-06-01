@@ -18,9 +18,9 @@
 
     uiGmapGoogleMapApi.then(function (maps) {
         $scope.options = { scrollwheel: false };
-        $scope.markers = googleMaps.getMarkers();
-        googleMaps.registerEvents($scope.markers);
-        $scope.onMarkerClicked = googleMaps.onMarkerClicked;
+        //$scope.markers = googleMaps.getMarkers();
+        //googleMaps.registerEvents($scope.markers);
+        //$scope.onMarkerClicked = googleMaps.onMarkerClicked;
     })
 
 })

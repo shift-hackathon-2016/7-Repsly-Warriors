@@ -2,7 +2,7 @@
     medications = {};
 
     medications.getAllMedications = function () {
-        return communication.ajaxGet('medications');
+        return communication.ajaxGet('Medicine/GetList');
     };
 
     medications.addMedication = function (scope) {
