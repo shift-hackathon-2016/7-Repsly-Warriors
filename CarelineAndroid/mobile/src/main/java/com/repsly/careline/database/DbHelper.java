@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.repsly.careline.model.ReminderScheduleItem;
 import com.repsly.careline.model.User;
+import com.repsly.careline.model.network.UserData;
 
 import java.util.ArrayList;
 
@@ -23,19 +24,20 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
-                "Create table User(accountRowId TEXT PRIMARY KEY, name Text, address TEXT, manager TEXT)");
+                "Create table User(accountRowId TEXT PRIMARY KEY, name Text, address TEXT, manager TEXT, avatar TEXT, email TEXT)");
         db.execSQL("Create table Schedule(id TEXT PRIMARY KEY, dateTime TEXT, note TEXT)");
         db.execSQL(
                 "Create table ScheduleItem(id TEXT PRIMARY KEY, scheduleId TEXT, medicineId TEXT, quantity TEXT)");
         db.execSQL("Create table Medicine(id TEXT PRIMARY KEY, name TEXT, type TEXT)");
 
         //TODO insert some dummy data
+        /*db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Adresa babe', '0')");
         db.execSQL("Insert into User values('fasdfasd','Ime babe', 'Velebitska 78, Split, Croatia', '0')");
         db.execSQL("Insert into Schedule values('1','2016-05-31T15:00:00','ovo je note')");
         db.execSQL("Insert into ScheduleItem values('1','1','1','20')");
         db.execSQL("Insert into ScheduleItem values('2','1','2','102')");
         db.execSQL("Insert into Medicine values('1','Lupocet','luda tableta')");
-        db.execSQL("Insert into Medicine values('2','Luda tableta','Note za ludoj tableti')");
+        db.execSQL("Insert into Medicine values('2','Luda tableta','Note za ludoj tableti')");*/
     }
 
     @Override
@@ -47,13 +49,15 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void saveUser(String accountRowId, String name, String address, boolean manager) {
+    public void saveUser(UserData userData) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("accountRowId", accountRowId);
-        cv.put("name", name);
-        cv.put("address", address);
-        cv.put("manager", (manager) ? 1 : 0);
+        cv.put("accountRowId", userData.accountRowId);
+        cv.put("name", userData.name);
+        cv.put("address", userData.address);
+        cv.put("manager", (userData.manager) ? 1 : 0);
+        cv.put("email", userData.email);
+        cv.put("avatar", userData.avatar);
         db.insert("User", null, cv);
         db.close();
     }

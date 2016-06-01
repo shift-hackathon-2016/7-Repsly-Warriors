@@ -6,6 +6,7 @@ import com.repsly.careline.helpers.AlarmHelper;
 import com.repsly.careline.helpers.gps.LocationHelper;
 import com.repsly.careline.model.User;
 import com.repsly.utils.lib.activities.abstracts.SplashAbstract;
+import com.tumblr.remember.Remember;
 
 /**
  * Created by Alen on 31.5.2016..
@@ -26,11 +27,10 @@ public class SplashActivity extends SplashAbstract {
     public Class getNextClassActivity() {
         LocationHelper.startLocationGettingProcess(getApplicationContext());
         AlarmHelper.setAlarmForMovementTracking(getApplicationContext());
-        DbHelper dbHelper = new DbHelper(this);
-        User user = dbHelper.getUser();
-
-        if (user != null) {
-            if (user.isManager()) {
+        boolean loggedIn = Remember.getBoolean("loggedIn", false);
+        boolean isManager = Remember.getBoolean("isManager", false);
+        if (loggedIn) {
+            if (isManager) {
                 return HomeGiverActivity.class;
             }
             return HomeReceiverActivity.class;

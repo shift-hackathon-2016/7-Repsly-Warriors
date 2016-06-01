@@ -8,6 +8,7 @@ import android.location.Location;
 import android.support.v4.content.ContextCompat;
 
 import com.google.android.gms.location.LocationResult;
+import com.repsly.careline.database.DbHelper;
 import com.repsly.careline.helpers.gps.FusedProvider;
 import com.tumblr.remember.Remember;
 
@@ -16,15 +17,17 @@ import com.tumblr.remember.Remember;
  */
 public class CarelineApplication extends Application {
 
+    protected static CarelineApplication instance;
     private static FusedProvider fusedProvider;
     private static boolean googleApiAvailable = false;
-
+    protected static DbHelper dbHelper;
     public static Location lastGpsLocation = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Remember.init(getApplicationContext(), "com.repsly.careline");
+        dbHelper = new DbHelper(getApplicationContext());
     }
 
     public static void checkForGoogleApi(Context context) {
@@ -76,5 +79,12 @@ public class CarelineApplication extends Application {
 
     public static void setLastGpsLocation(Location lastGpsLocation) {
         CarelineApplication.lastGpsLocation = lastGpsLocation;
+    }
+
+    public static DbHelper getDbHandler() {
+        if (dbHelper == null) {
+            dbHelper = new DbHelper(instance);
+        }
+        return dbHelper;
     }
 }
