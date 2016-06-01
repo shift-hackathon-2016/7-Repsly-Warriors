@@ -59,7 +59,11 @@ public class HomeReceiverActivity extends CarelineActivity {
     @Override
     public void main() {
         //TODO check if already downloaded this!
-        new Async().execute();
+        String todayDate = DateTimeUtil.toDateOnlyFormat(new Date());
+        String dateOfDownload = Remember.getString("dateOfDownload", "");
+        if (!todayDate.equals(dateOfDownload)) {
+            new Async().execute();
+        }
     }
 
     private class Async extends AsyncTask<Void, Void, List<Schedule>> {
@@ -70,7 +74,6 @@ public class HomeReceiverActivity extends CarelineActivity {
             DbHelper dbHelper = CarelineApplication.getDbHandler();
             dbHelper.saveSchedules(list);
             for (int i = 0; i < list.size(); i++) {
-                //TODO save it to the db!
                 Schedule schedule = list.get(0);
                 Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                 intent.putExtra("title", schedule.note);
@@ -98,6 +101,7 @@ public class HomeReceiverActivity extends CarelineActivity {
             super.onPostExecute(medicines);
             DbHelper dbHelper = CarelineApplication.getDbHandler();
             dbHelper.saveMedicines(medicines);
+            Remember.putString("dateOfDownload", DateTimeUtil.toDateOnlyFormat(new Date()));
         }
 
         @Override

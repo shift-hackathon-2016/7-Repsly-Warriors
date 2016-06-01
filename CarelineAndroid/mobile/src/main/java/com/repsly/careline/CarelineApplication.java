@@ -2,12 +2,8 @@ package com.repsly.careline;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.v4.content.ContextCompat;
 
-import com.google.android.gms.location.LocationResult;
 import com.repsly.careline.database.DbHelper;
 import com.repsly.careline.helpers.gps.FusedProvider;
 import com.tumblr.remember.Remember;
