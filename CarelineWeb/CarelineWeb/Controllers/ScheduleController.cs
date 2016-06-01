@@ -19,6 +19,11 @@ namespace CarelineWebAPI.Controllers
             return DBOperations.GetUserScheduleList(AccountContextHelper.GetContext().UserId);
         }
 
+        public List<ScheduleModel> GetSchedule(int Id)
+        {
+            return DBOperations.GetUserScheduleList(Id);
+        }
+
         [HttpPost]
         public int MedicineConfirmation([FromBody] MedicineConfirmationModel model)
         {
@@ -32,5 +37,18 @@ namespace CarelineWebAPI.Controllers
                 return 0;
             }
         }
+
+        public int SaveSchedule ([FromBody] ScheduleModel model)
+        {
+            try
+            {
+                return DBOperations.SaveSchedule(model, AccountContextHelper.GetContext().AccountId);
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+        }
+
     }
 }

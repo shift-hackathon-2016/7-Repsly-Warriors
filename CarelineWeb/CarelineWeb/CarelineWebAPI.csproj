@@ -151,6 +151,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AccountContextHelper.cs" />
+    <Compile Include="Helpers\MyXmlExtension.cs" />
     <Compile Include="Helpers\RequestValidationHelper.cs" />
     <Compile Include="Models\AccountContext.cs" />
     <Compile Include="Models\CareReceiverModel.cs" />

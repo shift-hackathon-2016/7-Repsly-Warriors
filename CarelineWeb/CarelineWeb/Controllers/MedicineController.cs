@@ -26,9 +26,16 @@ namespace CarelineWebAPI.Controllers
             }
         }
 
+        [HttpGet]
         public MedicineModel GetMedicine(int Id)
         {
             return DBOperations.GetMedicine(Id, AccountContextHelper.GetContext().AccountId);
+        }
+
+        [HttpGet]
+        public List<MedicineModel> GetList()
+        {
+            return DBOperations.GetMedicineList(AccountContextHelper.GetContext().AccountId);
         }
     }
 }

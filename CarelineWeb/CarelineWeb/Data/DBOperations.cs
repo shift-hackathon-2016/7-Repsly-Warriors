@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CarelineWebAPI.Models;
+using CarelineWebAPI.Helpers;
 using System.Configuration;
 using DBLayer;
 using System.Data;
@@ -33,6 +34,58 @@ namespace CarelineWebAPI.Data
             }
 
             return model;
+        }
+
+        internal static int SaveSchedule(ScheduleModel model, int accountId)
+        {
+            using (DBConnector connector = new DBConnector("save_Schedule", CommandType.StoredProcedure))
+            {
+                SqlParameter IDParam = new SqlParameter("@ScheduleID", SqlDbType.Int);
+                IDParam.Direction = ParameterDirection.InputOutput;
+                IDParam.Value = model.ScheduleId;
+                connector.Cmd.Parameters.Add(IDParam);
+
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Cmd.Parameters.AddWithValue("@UserID", model.UserID);
+                connector.Cmd.Parameters.AddWithValue("@ScheduleDateTime", model.ScheduleDateTime);
+                connector.Cmd.Parameters.AddWithValue("@Note", model.Note);
+                connector.Cmd.Parameters.AddWithValue("@ScheduleItemList", model.ScheduleItemList.CreateSqlXml());
+
+                connector.Execute(DBOperation.SaveWithOutput);
+
+                return Convert.ToInt32(connector.Cmd.Parameters["@ScheduleID"].Value);
+            }
+        }
+
+        internal static List<MedicineModel> GetMedicineList(int accountId)
+        {
+            List<MedicineModel> modelList = new List<MedicineModel>();
+
+            using (DBConnector connector = new DBConnector("get_MedicineList", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Execute(DBOperation.GetWhileReader);
+
+                if (connector.Rdr.HasRows)
+                {
+                    while (connector.Rdr.Read())
+                    {
+                        MedicineModel model = new MedicineModel();
+
+                        model.MedicineID = Convert.ToInt32(connector.Rdr["IDMedicine"]);
+                        model.Name = connector.Rdr["Name"].ToString();
+                        model.Description = connector.Rdr["Description"].ToString();
+                        model.MedImg = connector.Rdr["MedImg"].ToString();
+                        model.MedColor = connector.Rdr["MedColor"].ToString();
+                        model.MedType = connector.Rdr["MedType"].ToString();
+                        model.Quantity = Convert.ToDecimal(connector.Rdr["Quantity"]);
+
+                        modelList.Add(model);
+                    }
+                }
+            }
+
+            return modelList;
         }
 
         internal static MedicineModel GetMedicine(int id, int accountId)
@@ -254,6 +307,7 @@ namespace CarelineWebAPI.Data
                         ScheduleModel model = new ScheduleModel();
 
                         model.ScheduleId = Convert.ToInt32(connector.Rdr["IDSchedule"]);
+                        model.UserID = userId;
                         model.ScheduleRowid = (Guid)connector.Rdr["ScheduleRowid"];
                         model.ScheduleDateTime = (DateTime)connector.Rdr["ScheduleDateTime"];
                         model.Note = connector.Rdr["Note"].ToString();
@@ -289,7 +343,9 @@ namespace CarelineWebAPI.Data
                     {
                         ScheduleItem item = new ScheduleItem();
 
+                        item.MedicineID = Convert.ToInt32(connector.Rdr["MedicineID"]);
                         item.MedicineRowId = (Guid)connector.Rdr["MedicineRowId"];
+                        item.ScheduleItemID = Convert.ToInt32(connector.Rdr["IDScheduleItem"]);
                         item.ScheduleItemRowId = (Guid)connector.Rdr["ScheduleItemRowId"];
                         item.ItemName = connector.Rdr["ItemName"].ToString();
                         item.Quantity = Convert.ToDecimal(connector.Rdr["Quantity"]);
