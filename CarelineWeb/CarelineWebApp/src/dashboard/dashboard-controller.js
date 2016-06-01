@@ -9,8 +9,8 @@
         zoom: 15
     };
 
-    $scope.therapies = dashboard.getTherapies();
     $scope.receivers = dashboard.getAllReceivers();
+    $scope.therapies = {};// dashboard.getTherapies();
 
     uiGmapGoogleMapApi.then(function (maps) {
         $scope.options = { scrollwheel: false };

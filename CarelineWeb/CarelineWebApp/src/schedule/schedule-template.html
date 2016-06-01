@@ -1,0 +1,104 @@
+﻿<link href="src/assets/plugins/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
+<div ng-controller="ScheduleController">    
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="page-title">Schedule</h4>
+        </div>
+        <div class="col-sm-3 text-right">
+            <button class="btn btn-primary btn-custom waves-effect w-md waves-light m-b-5" data-toggle="modal" data-target="#event-modal">Add new reminder</button>
+        </div>
+    </div>
+    <!-- Page-Title -->
+
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <div class="card-box">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+    <div id="event-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Add New Reminder</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label for="Medication" class="control-label">Choose Medication</label>
+                                <select id="Medication" name="Medication" class="form-control select2">
+                                    <option value="">Viagra</option>
+                                    <option value="">Xanax</option>
+                                    <option value="">Marijuana Oil</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Quantity" class="control-label">Quantity</label>
+                                <input type="text" class="form-control" id="Quantity" name="Quantity" placeholder="1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Pick Date</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose" name="Date">
+                                    <span class="input-group-addon bg-primary b-0 text-white"><i class="ion-calendar"></i></span>
+                                </div><!-- input-group -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Pick Time</label>
+                                <div class="input-group m-b-15">
+                                    <div class="bootstrap-timepicker">
+                                        <input id="timepicker" name="Time" type="text" class="form-control">
+                                    </div>
+                                    <span class="input-group-addon bg-primary b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                </div><!-- input-group -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="Note" class="control-label">Note</label>
+                                <textarea class="form-control autogrow" id="Note" name="Note" placeholder="Add note for this reminder" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <label for="Note" class="control-label"><i class="md md-mic"></i> Custom voice reminder</label>
+                                <input type="file" id="MedImg" name="MedImg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-custom waves-effect w-md waves-light m-b-5">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal -->
+</div>
+<script src="src/assets/plugins/moment/moment.js"></script>
+<script src='src/assets/plugins/fullcalendar/dist/fullcalendar.min.js'></script>
+<script src="src/assets/pages/jquery.fullcalendar.js"></script>
+
+<script>
+    $(function () {
+        $.get('http://localhost:60319/api/Schedule/GetSchedule', function (data) {
+            $.CalendarApp.init(data);
+        });
+    })
+</script>

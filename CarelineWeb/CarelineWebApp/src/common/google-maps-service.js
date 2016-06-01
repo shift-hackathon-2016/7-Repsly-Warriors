@@ -6,6 +6,10 @@
         return communication.ajaxGet('locations');
     }
 
+    function getLocationsById(id) {
+        return communication.ajaxGet('locations/' + id);
+    }
+
     googleMaps.getMarkers = function () {
         var locations = getLocations();
         var markers = [];
@@ -23,7 +27,23 @@
         }
         return markers;
     }
+    googleMaps.getMarkersById = function (id) {
+        var locations = getLocationsById(id);
+        var markers = [];
+        var markersCount = locations.Tracking.length;
+        for (var i = 0; i < markersCount; i++) {
+            markers.push(
+                {
+                    id: i,
+                    coords: {
+                        latitude: locations.Tracking[i].Latitude,
+                        longitude: locations.Tracking[i].Longitude
+                    }
+                });
 
+        }
+        return markers;
+    }
     googleMaps.onMarkerClicked = function (marker) {
         //marker.showWindow = true;
         //$scope.$apply();

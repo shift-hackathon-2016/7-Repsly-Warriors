@@ -1,8 +1,6 @@
 ﻿carelineApp.factory('authService', function ($http, $q, localStorageService) {
     var _authentication = {
-        isAuth: false,
-        username: "",
-        password: ""
+        isAuth: false
     };
     var authServiceFactory = {};
     var fillAuthData = function () {

@@ -21,8 +21,15 @@ carelineApp.config(function ($routeProvider, $locationProvider, uiGmapGoogleMapA
             templateUrl: 'src/care-receivers/care-receivers-template.html'
         })
         .when('/receiver/:id', {
-            controller: 'CareReceiversController',
+            controller: 'CareReceiverController',
             templateUrl: 'src/care-receivers/care-receiver-template.html'
+            //receiver: function ($route, receiver) {
+            //    return receiver.getReceiverById({ id: $route.current.params.id });
+            //}
+        })
+        .when('/schedule', {
+            controller: 'ScheduleController',
+            templateUrl: 'src/schedule/schedule-template.html'
         })
         .when('/medications', {
             controller: 'MedicationsController',

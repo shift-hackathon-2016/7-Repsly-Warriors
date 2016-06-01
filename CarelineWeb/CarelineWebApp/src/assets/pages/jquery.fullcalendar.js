@@ -117,7 +117,7 @@
         });
     }
     /* Initializing */
-    CalendarApp.prototype.init = function () {
+    CalendarApp.prototype.init = function (myEvents) {
         this.enableDrag();
         /*  Initialize the calendar  */
         var date = new Date();
@@ -127,20 +127,7 @@
         var form = '';
         var today = new Date($.now());
 
-        var defaultEvents = [{
-            title: 'Viagra',
-            start: new Date($.now() + 158000000),
-            className: 'bg-purple'
-        }, {
-            title: 'Xanax',
-            start: today,
-            end: today,
-            className: 'bg-danger'
-        }, {
-            title: 'Marijuana Oil',
-            start: new Date($.now() + 338000000),
-            className: 'bg-primary'
-        }];
+        var defaultEvents = [];
 
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
@@ -155,7 +142,7 @@
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-            events: defaultEvents,
+            events: myEvents,
             editable: false,
             droppable: true, // this allows things to be dropped onto the calendar !!!
             eventLimit: true, // allow "more" link when too many events
@@ -186,5 +173,5 @@
 //initializing CalendarApp
 function ($) {
     "use strict";
-    $.CalendarApp.init()
+    //$.CalendarApp.init()
 }(window.jQuery);

@@ -5,6 +5,22 @@
         return communication.ajaxGet('receivers');
     };
 
+    receivers.getReceiverById = function (id) {
+        return communication.ajaxGet('receiver/' + id);
+    };
+
+    receivers.getScheduleById = function (id) {
+        return communication.ajaxGet('schedule/' + id);
+    };
+
+    receivers.getTherapyById = function (id) {
+        return communication.ajaxGet('CareReceiver/TherapyCard' + id);
+    };
+
+    schedule.getScheduleById = function () {
+        return communication.ajaxGet('schedule/' + id);
+    };
+
     receivers.addCareReceiver = function (scope) {
         var params = {};
         params.Name = scope.Name;
