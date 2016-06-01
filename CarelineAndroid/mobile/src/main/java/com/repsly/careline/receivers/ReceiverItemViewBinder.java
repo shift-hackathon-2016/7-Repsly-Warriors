@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -76,8 +77,7 @@ public class ReceiverItemViewBinder extends CarelineDataBinder<ReceiverItemViewB
         @Override
         public void fillDate(CareReceiver model) {
             tvName.setText(model.getName());
-            tvDescription.setText("Last movement: " + DateTimeUtil
-                    .toShowDate(DateTimeUtil.fromISODate(model.getLastMovement())));
+            tvDescription.setText("Last movement: " + DateTimeUtil.getTimeAgo(DateTimeUtil.fromISODate(model.getLastMovement()),dataBindAdapter.getActivity()));
             address=model.getAddress();
         }
 

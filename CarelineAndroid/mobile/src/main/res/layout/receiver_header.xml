@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/activity_horizontal_margin">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/activity_horizontal_margin">
 
     <RelativeLayout
         android:id="@+id/llText"
-        android:padding="35dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:background="@color/gray_bacground"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="35dp">
 
         <TextView
             android:id="@+id/tvWeekDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tuesday"
-            android:textSize="@dimen/receiver_header_text_size"/>
+            android:textSize="26sp"/>
 
         <TextView
             android:id="@+id/tvData"
@@ -25,16 +28,16 @@
             android:text="March 21th, 2016"
             android:textSize="@dimen/receiver_header_text_size"/>
 
-    <ImageButton
-        android:id="@+id/ibHelpCenter"
-        android:layout_toRightOf="@+id/tvData"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/transparent"
-        android:scaleType="fitEnd"
-        android:src="@mipmap/icon_alarm"/>
+        <ImageButton
+            android:id="@+id/ibHelpCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/tvData"
+            android:background="@color/transparent"
+            android:scaleType="fitEnd"
+            android:src="@mipmap/icon_alarm"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
