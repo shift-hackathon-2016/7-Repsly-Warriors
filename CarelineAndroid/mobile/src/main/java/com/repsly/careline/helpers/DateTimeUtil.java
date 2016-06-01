@@ -16,6 +16,7 @@ import java.util.Locale;
 public class DateTimeUtil {
 
     public final static String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    public final static String DATE_ONLY_FORMAT = "yyyy-MM-dd";
 
     public final static String DATE_FORMAT_SHOW = "EEE, MMM d, HH:mm";
 
@@ -33,6 +34,14 @@ public class DateTimeUtil {
             d = new Date(System.currentTimeMillis());
         }
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.US);
+        return sdf.format(d);
+    }
+
+    public static String toDateOnlyFormat(Date d) {
+        if (d == null) {
+            d = new Date(System.currentTimeMillis());
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_ONLY_FORMAT, Locale.US);
         return sdf.format(d);
     }
 

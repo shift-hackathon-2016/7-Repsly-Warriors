@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_weight="2"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.repsly.careline.MainActivity"
     >
 
@@ -15,13 +16,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Tralala"/>
+        android:text="Lupocet"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/btn_swallow"
-        android:text="Swallowed!"
+    <TextView
+        android:id="@+id/tv_quantity"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="wrap_content"/>
+        android:text="2 pills"
+        android:textSize="20dp"/>
+
+    <ImageButton
+        android:id="@+id/btn_swallow"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:background="@color/transparent"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_checked"/>
 
 </LinearLayout>
