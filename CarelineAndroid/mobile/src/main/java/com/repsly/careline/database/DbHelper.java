@@ -31,7 +31,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "Create table User(accountRowId TEXT PRIMARY KEY, name Text, address TEXT, manager TEXT, avatar TEXT, email TEXT)");
         db.execSQL("Create table Schedule(id TEXT PRIMARY KEY, dateTime TEXT, note TEXT)");
         db.execSQL(
-                "Create table ScheduleItem(id TEXT PRIMARY KEY, scheduleId TEXT, MedicineId TEXT, name TEXT, quantity TEXT)");
+                "Create table ScheduleItem(id TEXT PRIMARY KEY, scheduleId TEXT, medicineRowId TEXT, medicineId TEXT, name TEXT, quantity TEXT)");
         db.execSQL("Create table Medicine(id TEXT PRIMARY KEY, name TEXT, medImg TEXT, description TEXT, medColor TEXT, medType TEXT, quantity TEXT)");
 
         //TODO insert some dummy data
@@ -102,6 +102,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 ContentValues cv2 = new ContentValues();
                 cv2.put("id", si.id);
                 cv2.put("medicineId", si.medicineId);
+                cv2.put("medicineRowId", si.medicineRowId);
                 cv2.put("scheduleId", s.id); //schedule id!
                 cv2.put("name", si.name);
                 cv2.put("quantity", si.quantity);
@@ -135,7 +136,7 @@ public class DbHelper extends SQLiteOpenHelper {
         boolean hadRecods;
         ArrayList<ReminderScheduleItem> scheduleItems = new ArrayList<>();
         c = db.rawQuery(
-                "select s.datetime, m.name, m.medType, si.quantity from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId\n" +
+                "select s.datetime, si.medicineRowId, m.name, m.medType, si.quantity from Schedule as s left join ScheduleItem as si on s.id = si.scheduleId\n" +
                         "left join Medicine as m on si.medicineId = m.id", null);
         if (c != null) {
             hadRecods = c.moveToFirst();
@@ -143,6 +144,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 ReminderScheduleItem rsi = new ReminderScheduleItem();
                 rsi.name = c.getString(c.getColumnIndex("name"));
                 rsi.dateTime = c.getString(c.getColumnIndex("dateTime"));
+                rsi.medicineRowId = c.getString(c.getColumnIndex("medicineRowId"));
                 //rsi.note = c.getString(c.getColumnIndex("note"));
                 rsi.quantity = c.getString(c.getColumnIndex("quantity"));
                 rsi.type = c.getString(c.getColumnIndex("medType"));

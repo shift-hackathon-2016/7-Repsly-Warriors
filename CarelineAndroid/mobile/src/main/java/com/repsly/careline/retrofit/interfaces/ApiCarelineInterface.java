@@ -34,12 +34,11 @@ public interface ApiCarelineInterface  {
     @GET("/api/Medicine/GetList")
     Call<List<Medicine>> getMedicine();
 
+    @POST("/api/Schedule/MedicineConfirmation")
+    Call<Void> sendMedicineConformation(@Body MedicineConfirmation mc);
 
     @GET
     Call<User> getUserData(@Path("userId") String userId);
-
-    @POST("/api/Schedule/MedicineConfirmation")
-    Call<Void> sendMedicineConformation(@Body MedicineConfirmation mc);
 
     @POST()
     Call<Void> sendCurrentLocation(); //TODO implement

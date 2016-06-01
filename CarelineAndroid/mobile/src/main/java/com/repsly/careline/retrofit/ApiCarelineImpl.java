@@ -1,10 +1,12 @@
 package com.repsly.careline.retrofit;
 
 import android.util.Base64;
+import android.util.Log;
 
 import com.repsly.careline.interfaces.ILogin;
 import com.repsly.careline.model.CareReceiver;
 import com.repsly.careline.model.Medicine;
+import com.repsly.careline.model.MedicineConfirmation;
 import com.repsly.careline.model.Schedule;
 import com.repsly.careline.model.User;
 import com.repsly.careline.model.network.ServerStatus;
@@ -140,6 +142,28 @@ public class ApiCarelineImpl {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void sendMedicineConfirmation(MedicineConfirmation mc) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client.build())
+                .build();
+        ApiCarelineInterface apiCarelineService = retrofit.create(ApiCarelineInterface.class);
+        Call<Void> service = apiCarelineService.sendMedicineConformation(mc);
+        service.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                Log.d("Repsly debug message", "SENT!");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("Repsly debug message", "FAILED!");
+            }
+        });
+
     }
 
     /**

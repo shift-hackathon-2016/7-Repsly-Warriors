@@ -10,4 +10,5 @@ public class ReminderScheduleItem {
     public String name;
     public String type;
     public String quantity;
+    public String medicineRowId;
 }

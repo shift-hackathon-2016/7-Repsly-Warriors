@@ -13,6 +13,9 @@ public class ScheduleItem {
     @SerializedName("MedicineID")
     @Expose
     public String medicineId;
+    @SerializedName("MedicineRowId")
+    @Expose
+    public String medicineRowId;
     @SerializedName("ItemName")
     @Expose
     public String name;
