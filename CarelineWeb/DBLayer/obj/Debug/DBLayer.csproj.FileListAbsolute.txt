@@ -1,0 +1,4 @@
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\DBLayer\bin\Debug\DBLayer.dll
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\DBLayer\bin\Debug\DBLayer.pdb
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\DBLayer\obj\Debug\DBLayer.dll
+C:\Develop\Careline\7-Repsly-Warriors\CarelineWeb\DBLayer\obj\Debug\DBLayer.pdb

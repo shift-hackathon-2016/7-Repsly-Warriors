@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="CarelineWeb.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="CarelineWebAPI.Global" Language="C#" %>

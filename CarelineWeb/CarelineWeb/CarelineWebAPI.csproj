@@ -77,6 +77,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -86,6 +90,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -138,9 +146,32 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CareReceiverController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\MedicineController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Data\DBOperations.cs" />
+    <Compile Include="Filters\BasicAuthenticationFilter.cs" />
+    <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
+    <Compile Include="Filters\MyBasicAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccountContextHelper.cs" />
+    <Compile Include="Helpers\MyXmlExtension.cs" />
+    <Compile Include="Helpers\RequestValidationHelper.cs" />
+    <Compile Include="Models\AccountContext.cs" />
+    <Compile Include="Models\CareReceiverModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MedicineConfirmationModel.cs" />
+    <Compile Include="Models\MedicineModel.cs" />
+    <Compile Include="Models\ScheduleHistory.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\MyGlobals.cs" />
+    <Compile Include="Models\NewTrackingEventModel.cs" />
+    <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +180,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -158,8 +190,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBLayer\DBLayer.csproj">
+      <Project>{f3633a2d-34b6-4365-8177-770b69bcdbbc}</Project>
+      <Name>DBLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
