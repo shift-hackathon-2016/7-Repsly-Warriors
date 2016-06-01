@@ -57,6 +57,34 @@ namespace CarelineWebAPI.Data
             }
         }
 
+        internal static List<ScheduleHistory> GetScheduleHistory(int accountId)
+        {
+            List<ScheduleHistory> modelList = new List<ScheduleHistory>();
+
+            using (DBConnector connector = new DBConnector("get_ScheduleHistory", CommandType.StoredProcedure))
+            {
+                connector.Cmd.Parameters.AddWithValue("@AccountID", accountId);
+                connector.Execute(DBOperation.GetWhileReader);
+
+                if (connector.Rdr.HasRows)
+                {
+                    while (connector.Rdr.Read())
+                    {
+                        ScheduleHistory model = new ScheduleHistory();
+
+                        model.UserName = connector.Rdr["UserName"].ToString();
+                        model.Avatar = connector.Rdr["Avatar"].ToString();
+                        model.MedicineName = connector.Rdr["MedicineName"].ToString();
+                        model.MedicineDateTime = (DateTime)connector.Rdr["MedicineDateTime"];
+                        model.Active = (bool)connector.Rdr["Active"];
+
+                        modelList.Add(model);
+                    }
+                }
+            }
+            return modelList;
+        }
+
         internal static List<MedicineModel> GetMedicineList(int accountId)
         {
             List<MedicineModel> modelList = new List<MedicineModel>();
@@ -284,7 +312,7 @@ namespace CarelineWebAPI.Data
             using (DBConnector connector = new DBConnector("save_ScheduleConfirmation", CommandType.StoredProcedure))
             {
                 connector.Cmd.Parameters.AddWithValue("@UserID", userId);
-                connector.Cmd.Parameters.AddWithValue("@ScheduleRowid", model.ScheduleRowid);
+                connector.Cmd.Parameters.AddWithValue("@ScheduleItemRowid", model.ScheduleItemRowid);
                 connector.Cmd.Parameters.AddWithValue("@ConfirmationDateTime", model.ConfirmationDateTime);
 
                 connector.Execute(DBOperation.Save);
